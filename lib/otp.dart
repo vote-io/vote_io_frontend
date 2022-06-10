@@ -145,7 +145,7 @@ class _OTPState extends State<OTP> {
                               fontWeight: FontWeight.bold
                           ),),
                         onPressed: (){
-
+                            Navigator.pushReplacementNamed(context, 'dashboard1');
                         },
                       ),
                       decoration: BoxDecoration(

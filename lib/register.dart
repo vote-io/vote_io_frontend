@@ -108,7 +108,9 @@ class _RegisterState extends State<Register> {
                                     fontFamily: 'poppins',
                                     fontWeight: FontWeight.bold
                                 ),),
-                              onPressed: (){},
+                              onPressed: (){
+                                Navigator.pushReplacementNamed(context, 'otp');
+                              },
                             ),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),

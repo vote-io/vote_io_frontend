@@ -82,7 +82,6 @@ class _LoginState extends State<Login> {
                                 fillColor: Color.fromRGBO(43, 43, 43, 1),
                                 filled: true,
                                 enabledBorder: InputBorder.none,
-
                               ),
                             ),
                             decoration: BoxDecoration(
@@ -108,7 +107,9 @@ class _LoginState extends State<Login> {
                                     fontFamily: 'poppins',
                                     fontWeight: FontWeight.bold
                                 ),),
-                              onPressed: (){},
+                              onPressed: (){
+                                Navigator.pushReplacementNamed(context, 'otp');
+                              },
                             ),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
