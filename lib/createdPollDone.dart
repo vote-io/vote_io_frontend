@@ -139,7 +139,9 @@ class _CreatedPollDoneState extends State<CreatedPollDone> {
                             fontFamily: 'poppins',
                             fontWeight: FontWeight.bold
                         ),),
-                      onPressed: (){},
+                      onPressed: (){
+                        Navigator.pushReplacementNamed(context, 'declareResult');
+                      },
                     ),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),

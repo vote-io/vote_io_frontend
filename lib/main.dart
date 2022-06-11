@@ -8,10 +8,11 @@ import 'package:vote_io_frontend/joinPoll.dart';
 import 'package:vote_io_frontend/createPoll.dart';
 import 'package:vote_io_frontend/createdPollDone.dart';
 import 'package:vote_io_frontend/resultsDeclaration.dart';
+import 'package:vote_io_frontend/votePage.dart';
 
 void main() {
   runApp(MaterialApp(
-    initialRoute: 'declareResult',
+    initialRoute: 'votePoll',
 
     routes:{
       'login': (context)=> Login(),
@@ -23,6 +24,7 @@ void main() {
       'createPoll':(context)=>CreatePoll(),
       'createdPollDone':(context)=>CreatedPollDone(),
       'declareResult':(context)=>ResultsDeclare(),
+      'votePoll':(context)=>VotePage(),
     }
   ));
 }
