@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+class JoinPoll extends StatefulWidget {
+  const JoinPoll({Key? key}) : super(key: key);
 
   @override
-  State<Login> createState() => _LoginState();
+  State<JoinPoll> createState() => _JoinPollState();
 }
 
-class _LoginState extends State<Login> {
+class _JoinPollState extends State<JoinPoll> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -18,9 +18,9 @@ class _LoginState extends State<Login> {
             width: double.infinity,
             height: double.infinity,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                // SizedBox(height: 30),
+                 SizedBox(height: 30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -35,28 +35,28 @@ class _LoginState extends State<Login> {
                       ),)
                   ],
                 ),
-                // SizedBox(height: 25,),
+                 SizedBox(height: 25,),
                 Container(
                   child: Column(
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('Hello Again!',
-                          style: TextStyle(
-                            color: Color.fromRGBO(255, 255, 255, 1),
-                            fontSize: 42,
-                            fontFamily: 'poppins',
-                            fontWeight: FontWeight.w600,
-                          ),)
+                          Text('Join Poll',
+                            style: TextStyle(
+                              color: Color.fromRGBO(255, 255, 255, 1),
+                              fontSize: 42,
+                              fontFamily: 'poppins',
+                              fontWeight: FontWeight.w600,
+                            ),)
                         ],
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('Login to enter dashboard',
+                          Text('Enter the Poll ID and Unique Key to join Poll',
                             style: TextStyle(
-                              color: Color.fromRGBO(170,170,170, 1),
+                              color: Color.fromRGBO(170, 170, 170, 1),
                               fontSize: 18,
                               fontFamily: 'poppins',
                               fontWeight: FontWeight.w600,
@@ -67,7 +67,7 @@ class _LoginState extends State<Login> {
                   ),
                 ),
 
-                // SizedBox(height: 20,),
+                 SizedBox(height: 20,),
                 Container(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -81,9 +81,9 @@ class _LoginState extends State<Login> {
                             padding: const EdgeInsets.fromLTRB(40.0,10,40,0),
                             child: TextFormField(
                               decoration: InputDecoration(
-                                hintText: 'Phone no.',
+                                hintText: 'Poll ID',
                                 hintStyle: TextStyle(
-                                  color: Color.fromRGBO(170, 170, 170, 1)
+                                    color: Color.fromRGBO(170, 170, 170, 1)
                                 ),
                                 border: OutlineInputBorder(),
                                 fillColor: Color.fromRGBO(43, 43, 43, 1),
@@ -93,8 +93,36 @@ class _LoginState extends State<Login> {
                               ),
                             ),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Color.fromRGBO(43, 43, 43, 1)
+                                borderRadius: BorderRadius.circular(10),
+                                color: Color.fromRGBO(43, 43, 43, 1)
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 20,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Container(
+                            width: 300+100-50,
+                            height: 54,
+                            padding: const EdgeInsets.fromLTRB(40.0,10,40,0),
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                hintText: 'Unique Key',
+                                hintStyle: TextStyle(
+                                    color: Color.fromRGBO(170, 170, 170, 1)
+                                ),
+                                border: OutlineInputBorder(),
+                                fillColor: Color.fromRGBO(43, 43, 43, 1),
+                                filled: true,
+                                enabledBorder: InputBorder.none,
+
+                              ),
+                            ),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Color.fromRGBO(43, 43, 43, 1)
                             ),
                           ),
                         ],
@@ -108,7 +136,7 @@ class _LoginState extends State<Login> {
                             height: 54,
                             padding: const EdgeInsets.fromLTRB(40.0,10,40,0),
                             child: TextButton(
-                              child: Text('Get OTP',
+                              child: Text('Submit',
                                 style: TextStyle(
                                     color: Color.fromRGBO(255, 255, 255, 1),
                                     fontSize: 20,
@@ -130,75 +158,9 @@ class _LoginState extends State<Login> {
                 // SizedBox(height: 20,),
 
                 // SizedBox(height: 20,),
-                Row(children: <Widget>[
-                  Expanded(
-                    child: new Container(
-                        margin: const EdgeInsets.only(left: 10.0, right: 20.0),
-                        child: Divider(
-                          color: Color.fromRGBO(175, 175, 178, 1),
-                          height: 36,
-                          thickness: 2,
-                        )),
-                  ),
-                  Text("OR",
-                    style: TextStyle(
-                      color: Color.fromRGBO(255, 255, 255, 1),
-                      //   color: Colors.black12,
-                        fontSize: 14,
-                        fontFamily: 'poppins',
-                        fontWeight: FontWeight.w600
-                    ),) ,
-                  Expanded(
-                    child: new Container(
-                        margin: const EdgeInsets.only(left: 20.0, right: 10.0),
-                        child: Divider(
-                          color: Color.fromRGBO(175, 175, 178, 1),
-                          thickness: 2,
-                          height: 36,
-                        )),
-                  ),
-                ]),
+
                 // SizedBox(height: 10,),
-                Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('You can just',
-                          style: TextStyle(
-                            color: Color.fromRGBO(170, 170, 170, 1),
-                              fontSize: 16,
-                              fontFamily: 'poppins',
-                              fontWeight: FontWeight.w600
-                          ),)
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          TextButton(onPressed: (){
-                            Navigator.pushReplacementNamed(context, 'register');
-                            // Navigator.push(context, new MaterialPageRoute(
-                            //     builder: (context) => new Register())
-                            // );
-                          },
-                            child: Text(
-                              'Register as User',
-                              style: TextStyle(
-                                  color: Color.fromRGBO(13, 153, 255, 1),
-                                  fontFamily: 'poppins',
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                  decoration: TextDecoration.underline
-                              ),
-                            ),)
-                        ],
-                      )
-                    ],
-                  ),
-                ),
+
 
               ],
             ),

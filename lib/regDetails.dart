@@ -22,10 +22,17 @@ class _RegDetailsState extends State<RegDetails> {
               children: [
                 // SizedBox(height: 30),
                 Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(width: 30),
+
                     Image.asset('assets/logo.png'),
+                    Text('VoteHub',
+                      style: TextStyle(
+                          fontSize: 24,
+                          fontFamily: 'poppins',
+                          fontWeight: FontWeight.w600,
+                          color: Color.fromRGBO(73, 132, 224, 1)
+                      ),)
                   ],
                 ),
                 // SizedBox(height: 25,),

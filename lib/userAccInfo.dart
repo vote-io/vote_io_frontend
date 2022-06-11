@@ -23,12 +23,20 @@ class _UserAccountState extends State<UserAccount> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(width: 30),
+
                     Image.asset('assets/logo.png'),
+                    Text('VoteHub',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontFamily: 'poppins',
+                      fontWeight: FontWeight.w600,
+                      color: Color.fromRGBO(73, 132, 224, 1)
+                    ),)
                   ],
                 ),
-                SizedBox(height: 50.0,),
+                SizedBox(height: 30.0,),
                 Text(
                   'Edit Account',
                   style: TextStyle(
@@ -42,64 +50,63 @@ class _UserAccountState extends State<UserAccount> {
                 // SizedBox(height: 20,),
                 // imageProfile(),
                 SizedBox(height: 30,),
-                Container(
-                  child: TextFormField(
-                    // controller: Cname,
-                    decoration: InputDecoration(
-                      fillColor: Color.fromRGBO(53, 57, 53, 1),
-                      filled: true,
-                      border: OutlineInputBorder(
+                TextFormField(
+                  // controller: Cname,
+                  decoration: InputDecoration(
+                    fillColor: Color.fromRGBO(53, 57, 53, 1),
+                    filled: true,
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.teal,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: Colors.teal,
-                        ),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.deepPurple,
-                            width: 2,
-                          )),
-                      prefixIcon: Icon(
-                        Icons.person,
-                        color: Colors.white70,
-                      ),
-                      labelText: "E-Mail Id",
-                      //helperText: "Name can't be empty",
-                      hintText: "E-Mail Id",
-                      labelStyle: TextStyle(
-                        color: Colors.white,
-                      ),
+                          color: Colors.deepPurple,
+                          width: 2,
+                        )),
+                    prefixIcon: Icon(
+                      Icons.person,
+                      color: Colors.white70,
+                    ),
+                    labelText: "Name",
+                    //helperText: "Name can't be empty",
+                    hintText: "Name",
+                    labelStyle: TextStyle(
+                      color: Colors.white,
                     ),
                   ),
                 ),
                 //SizedBox(height: 30),
-                // TextFormField(
-                //   // controller: Cpassword,
-                //   decoration: InputDecoration(
-                //     fillColor: Color.fromRGBO(53, 57, 53, 1),
-                //     filled: true,
-                //     border: OutlineInputBorder(
-                //       borderSide: BorderSide(
-                //         color: Colors.teal,
-                //       ),
-                //     ),
-                //     focusedBorder: OutlineInputBorder(
-                //         borderSide: BorderSide(
-                //           color: Colors.deepPurple,
-                //           width: 2,
-                //         )),
-                //     prefixIcon: Icon(
-                //       Icons.email,
-                //       color: Colors.white70,
-                //     ),
-                //     labelText: "Password",
-                //     //helperText: "Email can't be empty",
-                //     hintText: "Password",
-                //     labelStyle: TextStyle(
-                //       color: Colors.white,
-                //     ),
-                //   ),
-                // ),
+                TextFormField(
+                  // controller: Cemail,
+                  decoration: InputDecoration(
+                    fillColor: Color.fromRGBO(53, 57, 53, 1),
+                    filled: true,
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.teal,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.deepPurple,
+                          width: 2,
+                        )),
+                    prefixIcon: Icon(
+                      Icons.email_rounded,
+                      color: Colors.white70,
+                    ),
+                    labelText: "E-Mail Id",
+                    //helperText: "Name can't be empty",
+                    hintText: "E-Mail Id",
+                    labelStyle: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
                 TextFormField(
                   // controller: CphoneNo,
                   decoration: InputDecoration(
