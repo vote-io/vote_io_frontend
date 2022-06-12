@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:vote_io_frontend/otp.dart';
+
+import 'blockchain/blockchainSetup.dart';
 
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
@@ -139,9 +142,12 @@ class _RegisterState extends State<Register> {
                                 fontFamily: 'poppins',
                                 fontWeight: FontWeight.bold),
                           ),
-                          onPressed: () {
+                          onPressed: () async {
                             print(phoneNo.text);
-                            sendOtp(context, phoneNo.text);
+                            //sendOtp(context, phoneNo.text);
+
+                            //await writeUser();
+                            await readUser();
                           },
                         ),
                       ),
@@ -229,8 +235,15 @@ class _RegisterState extends State<Register> {
   }
 }
 
-sendOtp(context, number){
+sendOtp(context, phoneNo) {
   //todo: send otp and verify
 
-  Navigator.of(context).pushNamed('otp');
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => OTP(
+        phoneNo: phoneNo,
+      ),
+    ),
+  );
 }

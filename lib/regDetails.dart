@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 
 class RegDetails extends StatefulWidget {
-  const RegDetails({Key? key}) : super(key: key);
+  RegDetails({Key? key, required this.phoneNo}) : super(key: key);
+
+  String phoneNo;
 
   @override
   State<RegDetails> createState() => _RegDetailsState();
 }
 
 class _RegDetailsState extends State<RegDetails> {
-
   late TextEditingController name, email;
+  late String phoneNo;
 
   @override
   void initState() {
     super.initState();
     name = TextEditingController();
     email = TextEditingController();
-
+    phoneNo = widget.phoneNo;
   }
 
   @override
@@ -164,8 +166,11 @@ class _RegDetailsState extends State<RegDetails> {
                   width: 300 + 100 - 50,
                   height: 54,
                   padding: const EdgeInsets.fromLTRB(40.0, 10, 40, 0),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Color.fromRGBO(22, 86, 185, 1)),
                   child: TextButton(
-                    child: Text(
+                    child: const Text(
                       'Confirm',
                       style: TextStyle(
                           color: Color.fromRGBO(255, 255, 255, 1),
@@ -176,11 +181,9 @@ class _RegDetailsState extends State<RegDetails> {
                     onPressed: () {
                       print(name.text);
                       print(email.text);
+                      print(phoneNo);
                     },
                   ),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Color.fromRGBO(22, 86, 185, 1)),
                 ),
               ],
             ),
@@ -193,6 +196,4 @@ class _RegDetailsState extends State<RegDetails> {
   }
 }
 
-uploadNewUser(context, name, email){
-
-}
+uploadNewUser(context, name, email) {}

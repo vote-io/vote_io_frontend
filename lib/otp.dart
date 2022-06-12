@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:vote_io_frontend/regDetails.dart';
 
 class OTP extends StatefulWidget {
-  const OTP({Key? key}) : super(key: key);
+  OTP({Key? key, required this.phoneNo}) : super(key: key);
+
+  String phoneNo;
 
   @override
   State<OTP> createState() => _OTPState();
@@ -11,10 +14,13 @@ class OTP extends StatefulWidget {
 class _OTPState extends State<OTP> {
   late TextEditingController otp;
 
+  late String phoneNo;
+
   @override
   void initState() {
     super.initState();
     otp = TextEditingController();
+    phoneNo = widget.phoneNo;
   }
 
   @override
@@ -177,7 +183,7 @@ class _OTPState extends State<OTP> {
                       borderRadius: BorderRadius.circular(10),
                       color: Color.fromRGBO(22, 86, 185, 1)),
                   child: TextButton(
-                    child: Text(
+                    child: const Text(
                       'CONFIRM',
                       style: TextStyle(
                           color: Color.fromRGBO(255, 255, 255, 1),
@@ -187,7 +193,8 @@ class _OTPState extends State<OTP> {
                     ),
                     onPressed: () {
                       print(otp.text);
-                      verifyOtp(context, otp);
+                      print(phoneNo);
+                      verifyOtp(context, otp, phoneNo);
                     },
                   ),
                 ),
@@ -200,8 +207,15 @@ class _OTPState extends State<OTP> {
   }
 }
 
-verifyOtp(context, otp){
+verifyOtp(context, otp, phoneNo) {
   //todo: verify otp
 
-  Navigator.of(context).pushNamed('regDetails');
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => RegDetails(
+        phoneNo: phoneNo,
+      ),
+    ),
+  );
 }
