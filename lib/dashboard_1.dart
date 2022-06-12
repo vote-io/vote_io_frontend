@@ -36,7 +36,7 @@ class _Dashboard1State extends State<Dashboard1> {
                     size: 35,
                   ),
                   onPressed: (){
-                    //Navigator.pushReplacementNamed(context, 'userAccount');
+                    Navigator.pushNamed(context, 'accountInfo');
                   },
                 ),
               ],

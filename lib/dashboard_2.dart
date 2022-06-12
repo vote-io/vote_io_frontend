@@ -36,7 +36,7 @@ class _Dashboard2State extends State<Dashboard2> {
                     size: 35,
                   ),
                   onPressed: (){
-                    //Navigator.pushReplacementNamed(context, 'userAccount');
+                    Navigator.pushNamed(context, 'accountInfo');
                   },
                 ),
               ],
@@ -85,7 +85,7 @@ class _Dashboard2State extends State<Dashboard2> {
                               ),
                             ),
                             onPressed: (){
-                              Navigator.pushReplacementNamed(context, 'dashboard1');
+                              // Navigator.pushReplacementNamed(context, 'dashboard1');
                             },
                           ),
                           Icon(
