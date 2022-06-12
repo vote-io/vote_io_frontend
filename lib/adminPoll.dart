@@ -1,14 +1,14 @@
-import 'package:expansion_card/expansion_card.dart';
 import 'package:flutter/material.dart';
 
-class VotePage extends StatefulWidget {
-  const VotePage({Key? key}) : super(key: key);
+class AdminPoll extends StatefulWidget {
+  const AdminPoll({Key? key}) : super(key: key);
 
   @override
-  State<VotePage> createState() => _VotePageState();
+  State<AdminPoll> createState() => _AdminPollState();
 }
 
-class _VotePageState extends State<VotePage> {
+class _AdminPollState extends State<AdminPoll> {
+  final _formKey = GlobalKey<FormState>();
 
   List<Map> candidate=[
     {'id':1,'name':'AAA','description':'This is candidate 1','picture':'assets/red.png'},
@@ -188,91 +188,86 @@ class _VotePageState extends State<VotePage> {
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, 'candidate_card', arguments: candidate[index]);
-                      },
-                      child: Card(
-                        color: Color.fromRGBO(38, 38, 38, 1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        elevation: 10,
-                        child: Container(
-                          child: Padding(
-                            padding:
-                            const EdgeInsets.fromLTRB(20, 20, 20, 20),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.center,
-                                      children: [
-                                        Container(
-                                          height: 25+5,
-                                          width: 25+5,
-                                          decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(10),
-                                              image: DecorationImage(
-                                            image: AssetImage('${candidate[index]['picture']}')
+                    child: Card(
+                      color: Color.fromRGBO(38, 38, 38, 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      elevation: 10,
+                      child: Container(
+                        child: Padding(
+                          padding:
+                          const EdgeInsets.fromLTRB(20, 20, 20, 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        height: 25+5,
+                                        width: 25+5,
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(10),
+                                            image: DecorationImage(
+                                                image: AssetImage('${candidate[index]['picture']}')
                                             )
-                                          ),
                                         ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                      ],
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          '${candidate[index]['name']}',
-                                          style: TextStyle(
-                                              fontFamily: 'montserrat',
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: 20,
-                                              color: Color.fromRGBO(
-                                                  251, 251, 251, 1)),
-                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.center,
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        '${candidate[index]['name']}',
+                                        style: TextStyle(
+                                            fontFamily: 'montserrat',
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 20,
+                                            color: Color.fromRGBO(
+                                                251, 251, 251, 1)),
+                                      ),
 
-                                        SizedBox(
-                                          height: 20,
-                                        ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
 
-                                        // Image.asset('assets/ticket_fill_2.png'),
-                                      ],
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.end,
-                                      children: [
-                                        Text(
-                                          '${candidate[index]['id']}',
-                                          style: TextStyle(
-                                              fontFamily: 'montserrat',
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: 18,
-                                              color: Color.fromRGBO(
-                                                  251, 251, 251, 1)),
-                                          textAlign: TextAlign.end,
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
+                                      // Image.asset('assets/ticket_fill_2.png'),
+                                    ],
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                        '${candidate[index]['id']}',
+                                        style: TextStyle(
+                                            fontFamily: 'montserrat',
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 18,
+                                            color: Color.fromRGBO(
+                                                251, 251, 251, 1)),
+                                        textAlign: TextAlign.end,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -280,8 +275,60 @@ class _VotePageState extends State<VotePage> {
                   );
                 },
               ),
-            )
-
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 300+100-50,
+                  height: 54,
+                  padding: const EdgeInsets.fromLTRB(40.0,10,40,0),
+                  child: TextButton(
+                    child: Text('Add a new candidate',
+                      style: TextStyle(
+                          color: Color.fromRGBO(255, 255, 255, 1),
+                          fontSize: 20,
+                          fontFamily: 'poppins',
+                          fontWeight: FontWeight.bold
+                      ),),
+                    onPressed: (){
+                      Navigator.pushReplacementNamed(context, 'addCandidate');
+                    },
+                  ),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Color.fromRGBO(22, 86, 185, 1)
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 20,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 300+100-50,
+                  height: 54,
+                  padding: const EdgeInsets.fromLTRB(40.0,10,40,0),
+                  child: TextButton(
+                    child: Text('Declare Results',
+                      style: TextStyle(
+                          color: Color.fromRGBO(255, 255, 255, 1),
+                          fontSize: 20,
+                          fontFamily: 'poppins',
+                          fontWeight: FontWeight.bold
+                      ),),
+                    onPressed: (){
+                      Navigator.pushReplacementNamed(context, 'declareResult');
+                    },
+                  ),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Color.fromRGBO(22, 86, 185, 1)
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

@@ -160,47 +160,81 @@ class _Dashboard2State extends State<Dashboard2> {
                   child: ListView.builder(
                       itemCount: createdPolls.length,
                       itemBuilder: (context,index){
-                        return Container(
-                          margin: EdgeInsets.fromLTRB(10, 20, 10, 0),
-                          width: 300+100-50,
-                          height: 54,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Color.fromRGBO(43, 43, 43, 1)
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text('${createdPolls[index]['title']}',
-                                style: TextStyle(
-                                  color: Color.fromRGBO(170, 170, 170, 1),
-                                  fontWeight: FontWeight.w600,
-                                  fontFamily: 'poppins',
-                                  fontSize: 18,
-                                ),
+                        return Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
+                          child: GestureDetector(
+                            onTap: (){
+                              Navigator.pushNamed(context, 'votePoll');
+                            },
+                            child: Container(
+                              margin: EdgeInsets.fromLTRB(10, 20, 10, 0),
+                              width: 300+100-50,
+                              height: 54,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Color.fromRGBO(43, 43, 43, 1)
                               ),
-                              Text('${createdPolls[index]['date']}',
-                                style: TextStyle(
-                                  color: Color.fromRGBO(170, 170, 170, 1),
-                                  fontWeight: FontWeight.w600,
-                                  fontFamily: 'poppins',
-                                  fontSize: 18,
-                                ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text('${createdPolls[index]['title']}',
+                                    style: TextStyle(
+                                      color: Color.fromRGBO(170, 170, 170, 1),
+                                      fontWeight: FontWeight.w600,
+                                      fontFamily: 'poppins',
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                  Text('${createdPolls[index]['date']}',
+                                    style: TextStyle(
+                                      color: Color.fromRGBO(170, 170, 170, 1),
+                                      fontWeight: FontWeight.w600,
+                                      fontFamily: 'poppins',
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                  Text('${createdPolls[index]['time_left']}',
+                                    style: TextStyle(
+                                      color: Color.fromRGBO(170, 170, 170, 1),
+                                      fontWeight: FontWeight.w600,
+                                      fontFamily: 'poppins',
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Text('${createdPolls[index]['time_left']}',
-                                style: TextStyle(
-                                  color: Color.fromRGBO(170, 170, 170, 1),
-                                  fontWeight: FontWeight.w600,
-                                  fontFamily: 'poppins',
-                                  fontSize: 18,
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
                         );
                       }
                   ),
-                )
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 300+100-50,
+                      height: 54,
+                      padding: const EdgeInsets.fromLTRB(40 ,10,40,0),
+                      child: TextButton(
+                        child: Text('Join a Poll',
+                          style: TextStyle(
+                              color: Color.fromRGBO(255, 255, 255, 1),
+                              fontSize: 20,
+                              fontFamily: 'poppins',
+                              fontWeight: FontWeight.bold
+                          ),),
+                        onPressed: (){
+                          Navigator.pushReplacementNamed(context, 'joinPoll');
+                        },
+                      ),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Color.fromRGBO(22, 86, 185, 1)
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),

@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 
-class CreatePoll extends StatefulWidget {
-  const CreatePoll({Key? key}) : super(key: key);
+class AddCandidate extends StatefulWidget {
+  const AddCandidate({Key? key}) : super(key: key);
 
   @override
-  State<CreatePoll> createState() => _CreatePollState();
+  State<AddCandidate> createState() => _AddCandidateState();
 }
 
-
-
-
-class _CreatePollState extends State<CreatePoll> {
+class _AddCandidateState extends State<AddCandidate> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -48,7 +45,7 @@ class _CreatePollState extends State<CreatePoll> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Create Poll',
+                    Text('Add a Candidate',
                       style: TextStyle(
                         color: Color.fromRGBO(255, 255, 255, 1),
                         fontSize: 42,
@@ -61,7 +58,7 @@ class _CreatePollState extends State<CreatePoll> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Create a new Poll',
+                    Text('Add details of the new Candidate here',
                       style: TextStyle(
                         color: Color.fromRGBO(170, 170, 170, 1),
                         fontSize: 18,
@@ -76,7 +73,7 @@ class _CreatePollState extends State<CreatePoll> {
                   child: SizedBox(
                     height: 420,
                     child: SingleChildScrollView(
-                      child: create_poll_form(),
+                      child: AddCandidate_Form(),
                     ),
                   ),
                 )
@@ -90,39 +87,27 @@ class _CreatePollState extends State<CreatePoll> {
   }
 }
 
-class create_poll_form extends StatefulWidget {
-  const create_poll_form({Key? key}) : super(key: key);
+
+class AddCandidate_Form extends StatefulWidget {
+  const AddCandidate_Form({Key? key}) : super(key: key);
 
   @override
-  State<create_poll_form> createState() => _create_poll_formState();
+  State<AddCandidate_Form> createState() => _AddCandidate_FormState();
 }
 
-class _create_poll_formState extends State<create_poll_form> {
+class _AddCandidate_FormState extends State<AddCandidate_Form> {
+
   final _formKey = GlobalKey<FormState>();
-  DateTime selectedDate = DateTime.now();
-
-
 
   @override
   Widget build(BuildContext context) {
-    Future<void> _selectDate(BuildContext context) async{
-      final DateTime? picked = await showDatePicker(
-          context: context,
-          initialDate: selectedDate,
-          firstDate: DateTime(2022),
-          lastDate: DateTime(2025));
-      if(picked!=null && picked!=selectedDate)
-        setState(() {
-          selectedDate= picked;
-        });
-    }
     return Form(
       key: _formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 20,),
-          Text('Enter name of the poll',style: TextStyle(
+          Text('Enter name of the candidate',style: TextStyle(
             fontFamily: 'poppins',
             fontWeight: FontWeight.w500,
             color: Colors.white,
@@ -134,7 +119,7 @@ class _create_poll_formState extends State<create_poll_form> {
             padding: const EdgeInsets.fromLTRB(40.0,10,40,0),
             child: TextFormField(
               decoration: InputDecoration(
-                hintText: 'Name of Poll',
+                hintText: 'Name of Candidate',
                 hintStyle: TextStyle(
                     color: Color.fromRGBO(170, 170, 170, 1)
                 ),
@@ -153,7 +138,7 @@ class _create_poll_formState extends State<create_poll_form> {
           SizedBox(height: 10,),
 
 
-          Text('Enter poll description',style: TextStyle(
+          Text('Enter description of the candidate',style: TextStyle(
             fontFamily: 'poppins',
             fontWeight: FontWeight.w500,
             color: Colors.white,
@@ -189,40 +174,32 @@ class _create_poll_formState extends State<create_poll_form> {
 
           SizedBox(height: 10,),
 
-          Text('Enter date',style: TextStyle(
+          Text('Upload Picture :)',style: TextStyle(
             fontFamily: 'poppins',
             fontWeight: FontWeight.w500,
             color: Colors.white,
             fontSize: 18,),),
 
           Container(
-            width: 350,
+            width: 300+100-50,
             height: 54,
-            padding:EdgeInsets.fromLTRB(40, 10, 40, 0),
+            padding: const EdgeInsets.fromLTRB(40.0,10,40,0),
+            child: TextFormField(
+              decoration: InputDecoration(
+                hintText: 'Candidate Picture',
+                hintStyle: TextStyle(
+                    color: Color.fromRGBO(170, 170, 170, 1)
+                ),
+                border: OutlineInputBorder(),
+                fillColor: Color.fromRGBO(43, 43, 43, 1),
+                filled: true,
+                enabledBorder: InputBorder.none,
+
+              ),
+            ),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Color.fromRGBO(43, 43, 43, 1)
-            ),
-            child:Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("${selectedDate.toLocal()}".split(' ')[0],style: TextStyle(
-                  fontFamily: 'poppins',
-                  fontWeight: FontWeight.w600,
-                  color: Color.fromRGBO(198, 198, 198, 1),
-                  fontSize: 18,),),
-
-                RaisedButton(
-                  onPressed: () => _selectDate(context), // Refer step 3
-                  child: Text(
-                    'Select date',
-                    style:
-                    TextStyle(color: Color.fromRGBO(198, 198, 198, 1), fontWeight: FontWeight.bold),
-                  ),
-                  color:Color.fromRGBO(33, 33, 33, 1),
-                  elevation: 0,
-                ),
-              ],
             ),
           ),
           SizedBox(
@@ -238,7 +215,7 @@ class _create_poll_formState extends State<create_poll_form> {
                 height: 54,
                 padding: const EdgeInsets.fromLTRB(40.0,10,40,0),
                 child: TextButton(
-                  child: Text('Create Poll',
+                  child: Text('Add Candidate',
                     style: TextStyle(
                         color: Color.fromRGBO(255, 255, 255, 1),
                         fontSize: 20,
@@ -246,10 +223,10 @@ class _create_poll_formState extends State<create_poll_form> {
                         fontWeight: FontWeight.bold
                     ),),
                   onPressed: (){
-                  Navigator.pushReplacementNamed(context, 'dialogBox',arguments: {
-                  'title':'Successful',
-                  'content':'You have successfully created this poll. Find your poll on the dashboard.'
-                  });
+                    Navigator.pushReplacementNamed(context, 'dialogBox',arguments: {
+                      'title':'Successful',
+                      'content':'You have successfully added a candidate to the poll'
+                    });
                   },
                 ),
                 decoration: BoxDecoration(
