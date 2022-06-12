@@ -17,7 +17,7 @@ import 'blockchain/blockchainSetup.dart';
 void main() async {
   runApp(
     MaterialApp(
-      initialRoute: 'register',
+      initialRoute: 'votePoll',
       routes: {
         'login': (context) => Login(),
         'register': (context) => Register(),
@@ -29,6 +29,7 @@ void main() async {
         'votePoll': (context) => VotePage(),
         'dashboard1':(context)=>Dashboard1(),
         'dashboard2':(context)=>Dashboard2(),
+        'otp':(context)=>OTP(phoneNo: '911'),
       },
     ),
   );

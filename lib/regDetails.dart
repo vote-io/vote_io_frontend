@@ -182,6 +182,7 @@ class _RegDetailsState extends State<RegDetails> {
                       print(name.text);
                       print(email.text);
                       print(phoneNo);
+                      Navigator.pushReplacementNamed(context, 'dashboard1');
                     },
                   ),
                 ),

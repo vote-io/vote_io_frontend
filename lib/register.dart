@@ -147,7 +147,8 @@ class _RegisterState extends State<Register> {
                             //sendOtp(context, phoneNo.text);
 
                             //await writeUser();
-                            await readUser();
+                            // await readUser();
+                            Navigator.pushReplacementNamed(context, 'otp');
                           },
                         ),
                       ),

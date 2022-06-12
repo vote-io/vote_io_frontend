@@ -242,7 +242,9 @@ class _create_poll_formState extends State<create_poll_form> {
                         fontFamily: 'poppins',
                         fontWeight: FontWeight.bold
                     ),),
-                  onPressed: (){},
+                  onPressed: (){
+
+                  },
                 ),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
