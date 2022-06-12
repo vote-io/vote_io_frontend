@@ -6,7 +6,9 @@ import 'package:vote_io_frontend/login.dart';
 import 'package:vote_io_frontend/dashboard_1.dart';
 void main() {
   runApp(MaterialApp(
+
     initialRoute: 'dashboard1',
+
 
     routes:{
       'login': (context)=> Login(),

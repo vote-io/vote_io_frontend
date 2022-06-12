@@ -8,6 +8,13 @@ class Dashboard1 extends StatefulWidget {
 }
 
 class _Dashboard1State extends State<Dashboard1> {
+
+  List<Map> createdPolls=[
+    {'title':'Election1','date':'date','time_left':'time'},
+    {'title':'Election1','date':'date','time_left':'time'},
+    {'title':'Election1','date':'date','time_left':'time'},
+  ];
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -23,9 +30,14 @@ class _Dashboard1State extends State<Dashboard1> {
                     color: Color.fromRGBO(73, 132, 224, 1),
                   ),
                 ),
-                Icon(
-                  Icons.account_circle_rounded,
-                  size: 35,
+                TextButton(
+                  child: Icon(
+                    Icons.account_circle_rounded,
+                    size: 35,
+                  ),
+                  onPressed: (){
+                    //Navigator.pushReplacementNamed(context, 'userAccount');
+                  },
                 ),
               ],
             ),
