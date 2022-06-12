@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:vote_io_frontend/otp.dart';
+import 'dart:convert';
 
-import 'blockchain/blockchainSetup.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:vote_io_frontend/otp.dart';
 
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
@@ -23,6 +24,24 @@ class _RegisterState extends State<Register> {
   void dispose() {
     phoneNo.dispose();
     super.dispose();
+  }
+
+  TextEditingController emailCont = TextEditingController();
+  TextEditingController name = TextEditingController();
+
+  Future<http.Response> register(
+      String email, String username, String phone) async {
+    return http.post(
+      Uri.parse('http://localhost:3001/user/signup'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: json.encode(<String, String>{
+        'email': email,
+        'username': username,
+        'phone': phone
+      }),
+    );
   }
 
   @override
@@ -97,15 +116,16 @@ class _RegisterState extends State<Register> {
                       Container(
                         width: 300 + 100 - 50,
                         height: 54,
-                        padding: const EdgeInsets.fromLTRB(40.0, 10, 40, 0),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: const Color.fromRGBO(43, 43, 43, 1)),
+                            color: Color.fromRGBO(43, 43, 43, 1)),
                         child: TextFormField(
                           controller: phoneNo,
-                          keyboardType: TextInputType.number,
+                          style: const TextStyle(
+                            color: Color(0xffAAAAAA),
+                          ),
                           decoration: const InputDecoration(
-                            hintText: 'Phone no.',
+                            hintText: 'Phone Number',
                             hintStyle: TextStyle(
                                 color: Color.fromRGBO(170, 170, 170, 1)),
                             border: OutlineInputBorder(),
@@ -113,9 +133,66 @@ class _RegisterState extends State<Register> {
                             filled: true,
                             enabledBorder: InputBorder.none,
                           ),
-                          style: (const TextStyle(
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        width: 300 + 100 - 50,
+                        height: 54,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Color.fromRGBO(43, 43, 43, 1)),
+                        child: TextFormField(
+                          controller: name,
+                          style: const TextStyle(
                             color: Color(0xffAAAAAA),
-                          )),
+                          ),
+                          decoration: const InputDecoration(
+                            hintText: 'Your Name',
+                            hintStyle: TextStyle(
+                                color: Color.fromRGBO(170, 170, 170, 1)),
+                            border: OutlineInputBorder(),
+                            fillColor: Color.fromRGBO(43, 43, 43, 1),
+                            filled: true,
+                            enabledBorder: InputBorder.none,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        width: 300 + 100 - 50,
+                        height: 54,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: const Color.fromRGBO(43, 43, 43, 1)),
+                        child: TextFormField(
+                          controller: emailCont,
+                          style: const TextStyle(
+                            color: Color(0xffAAAAAA),
+                          ),
+                          decoration: const InputDecoration(
+                            hintText: 'Your Email',
+                            hintStyle: TextStyle(
+                                color: Color.fromRGBO(170, 170, 170, 1)),
+                            border: OutlineInputBorder(),
+                            fillColor: Color.fromRGBO(43, 43, 43, 1),
+                            filled: true,
+                            enabledBorder: InputBorder.none,
+                          ),
                         ),
                       ),
                     ],
@@ -143,12 +220,30 @@ class _RegisterState extends State<Register> {
                                 fontWeight: FontWeight.bold),
                           ),
                           onPressed: () async {
-                            print(phoneNo.text);
+                            String phone = phoneNo.text;
+                            String username = name.text;
+                            String email = emailCont.text;
+
+                            http.Response response =
+                                await register(email, username, '+91${phone}');
+                            Map res = json.decode(response.body);
+
+                            print(res);
+                            if (res.containsKey("_id")) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => OTP(
+                                          phoneNo: phone,
+                                        )),
+                              );
+                            }
+
                             //sendOtp(context, phoneNo.text);
 
                             //await writeUser();
                             // await readUser();
-                            Navigator.pushReplacementNamed(context, 'otp');
+                            // Navigator.pushReplacementNamed(context, 'otp');
                           },
                         ),
                       ),

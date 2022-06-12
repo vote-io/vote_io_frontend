@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:vote_io_frontend/regDetails.dart';
 
@@ -27,6 +30,16 @@ class _OTPState extends State<OTP> {
   void dispose() {
     otp.dispose();
     super.dispose();
+  }
+
+  Future<http.Response> verify(String phone, String otp) async {
+    return http.post(
+      Uri.parse('http://localhost:3001/user/verify'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: json.encode(<String, String>{'phone': phone, "otp": otp}),
+    );
   }
 
   @override
@@ -191,10 +204,16 @@ class _OTPState extends State<OTP> {
                           fontFamily: 'poppins',
                           fontWeight: FontWeight.bold),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       print(otp.text);
                       print(phoneNo);
-                      verifyOtp(context, otp, phoneNo);
+
+                      http.Response response =
+                          await verify('+91${phoneNo}', otp.text);
+                      Map res = json.decode(response.body);
+                      print(res);
+
+                      // verifyOtp(context, otp, phoneNo);
                     },
                   ),
                 ),
