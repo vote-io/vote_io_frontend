@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vote_io_frontend/adminPoll.dart';
 import 'package:vote_io_frontend/register.dart';
 import 'package:vote_io_frontend/regDetails.dart';
 import 'package:vote_io_frontend/otp.dart';
@@ -11,13 +12,16 @@ import 'package:vote_io_frontend/resultsDeclaration.dart';
 import 'package:vote_io_frontend/votePage.dart';
 import 'package:vote_io_frontend/dashboard_2.dart';
 import 'package:vote_io_frontend/dashboard_1.dart';
+import 'package:vote_io_frontend/candidateCard.dart';
+import 'package:vote_io_frontend/DialogBox.dart';
+import 'package:vote_io_frontend/addCandidate.dart';
 
 import 'blockchain/blockchainSetup.dart';
 
 void main() async {
   runApp(
     MaterialApp(
-      initialRoute: 'votePoll',
+      initialRoute: 'dashboard1',
       routes: {
         'login': (context) => Login(),
         'register': (context) => Register(),
@@ -29,7 +33,11 @@ void main() async {
         'votePoll': (context) => VotePage(),
         'dashboard1':(context)=>Dashboard1(),
         'dashboard2':(context)=>Dashboard2(),
-        'otp':(context)=>OTP(phoneNo: '911'),
+        //'otp':(context)=>OTP(phoneNo: '911'),
+        'candidate_card':(context)=>CandidateCard(),
+        'dialogBox':(context)=>DialogBox(),
+        'adminPoll':(context)=>AdminPoll(),
+        'addCandidate':(context)=>AddCandidate(),
       },
     ),
   );

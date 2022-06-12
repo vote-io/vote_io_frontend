@@ -143,7 +143,12 @@ class _JoinPollState extends State<JoinPoll> {
                                     fontFamily: 'poppins',
                                     fontWeight: FontWeight.bold
                                 ),),
-                              onPressed: (){},
+                              onPressed: (){
+                                Navigator.pushReplacementNamed(context, 'dialogBox',arguments: {
+                                  'title':'Successful',
+                                  'content':'You have successfully registered to vote for this poll. Find your poll on the dashboard.'
+                                });
+                              },
                             ),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
