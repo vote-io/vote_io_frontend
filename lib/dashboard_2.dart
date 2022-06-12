@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Dashboard1 extends StatefulWidget {
-  const Dashboard1({Key? key}) : super(key: key);
+class Dashboard2 extends StatefulWidget {
+  const Dashboard2({Key? key}) : super(key: key);
 
   @override
-  State<Dashboard1> createState() => _Dashboard1State();
+  State<Dashboard2> createState() => _Dashboard2State();
 }
 
-class _Dashboard1State extends State<Dashboard1> {
+class _Dashboard2State extends State<Dashboard2> {
 
   List<Map> createdPolls=[
     {'title':'Election1','date':'date','time_left':'time'},
@@ -51,15 +51,15 @@ class _Dashboard1State extends State<Dashboard1> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Padding(padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                    child: Text(
-                      '   Dashboard',
-                      style: TextStyle(
-                          color: Color.fromRGBO(231, 231, 231, 1),
-                          fontSize: 22,
-                          fontFamily: 'poppins',
-                          fontWeight: FontWeight.w400
-                      ),
-                    ),)
+                      child: Text(
+                        '   Dashboard',
+                        style: TextStyle(
+                            color: Color.fromRGBO(231, 231, 231, 1),
+                            fontSize: 22,
+                            fontFamily: 'poppins',
+                            fontWeight: FontWeight.w400
+                        ),
+                      ),)
                   ],
                 ),
                 Row(
@@ -76,9 +76,9 @@ class _Dashboard1State extends State<Dashboard1> {
                         children: [
                           TextButton(
                             child: Text(
-                                'Upcoming ',
+                              'Upcoming ',
                               style: TextStyle(
-                                color: Color.fromRGBO(255, 255, 255, 1),
+                                  color: Color.fromRGBO(255, 255, 255, 1),
                                   fontSize: 16,
                                   fontFamily: 'poppins',
                                   fontWeight: FontWeight.w400
@@ -110,14 +110,15 @@ class _Dashboard1State extends State<Dashboard1> {
                                 Container(
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
-                                      color: Color.fromRGBO(27, 27, 27, 1)
+                                      color: Color.fromRGBO(80, 80, 80, 1)
                                   ),
+
                                   child: TextButton(
                                     child: Text(
                                       'Created ',
                                       style: TextStyle(
                                           color: Color.fromRGBO(255, 255, 255, 1),
-                                         fontSize: 16,
+                                          fontSize: 16,
                                           fontFamily: 'poppins',
                                           fontWeight: FontWeight.w400
                                       ),
@@ -130,7 +131,7 @@ class _Dashboard1State extends State<Dashboard1> {
                                 Container(
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
-                                      color: Color.fromRGBO(80, 80, 80, 1)
+                                      color: Color.fromRGBO(27, 27, 27, 1)
                                   ),
                                   child: TextButton(
                                     child: Text(
@@ -207,4 +208,3 @@ class _Dashboard1State extends State<Dashboard1> {
     );
   }
 }
-
