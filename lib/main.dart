@@ -12,7 +12,7 @@ import 'package:vote_io_frontend/votePage.dart';
 
 void main() {
   runApp(MaterialApp(
-    initialRoute: 'votePoll',
+    initialRoute: 'register',
 
     routes:{
       'login': (context)=> Login(),
