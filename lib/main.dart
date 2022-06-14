@@ -9,6 +9,7 @@ import 'package:vote_io_frontend/dashboard_1.dart';
 import 'package:vote_io_frontend/dashboard_2.dart';
 import 'package:vote_io_frontend/joinPoll.dart';
 import 'package:vote_io_frontend/login.dart';
+import 'package:vote_io_frontend/pollStep2.dart';
 import 'package:vote_io_frontend/register.dart';
 import 'package:vote_io_frontend/resultsDeclaration.dart';
 import 'package:vote_io_frontend/userAccInfo.dart';
@@ -19,7 +20,7 @@ import 'blockchain/blockchainSetup.dart';
 void main() async {
   runApp(
     MaterialApp(
-      initialRoute: '/',
+      initialRoute: 'addCandidate',
       routes: {
         'login': (context) => Login(),
         'register': (context) => Register(),
@@ -35,7 +36,14 @@ void main() async {
         'candidate_card': (context) => CandidateCard(),
         'dialogBox': (context) => DialogBox(),
         'adminPoll': (context) => AdminPoll(),
-        'addCandidate': (context) => AddCandidate(),
+        'addCandidate': (context) => AddCandidate(
+              candidates: [{}, {}],
+            ),
+        'pollStep2': (context) => pollStep2(
+              desc: '',
+              date: DateTime.now(),
+              pollName: '',
+            ),
       },
     ),
   );

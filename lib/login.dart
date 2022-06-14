@@ -145,7 +145,7 @@ class _LoginState extends State<Login> {
                             print(res);
 
                             if (res.containsKey("_id")) {
-                              Navigator.push(
+                              Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => OTP(

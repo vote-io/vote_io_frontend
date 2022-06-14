@@ -1,18 +1,14 @@
-
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:web3dart/web3dart.dart';
 import 'package:http/http.dart';
-
+import 'package:web3dart/web3dart.dart';
 
 late Client httpClient;
 late Web3Client ethClient;
 // JSON-RPC is a remote procedure call protocol encoded in JSON
 // Remote Procedure Call (RPC) is about executing a block of code on another server
 String rpcUrl = 'http://10.0.2.2:7545';
-
 
 Future<void> initialBlockChainSetup() async {
   /// This will start a client that connects to a JSON RPC API, available at RPC URL.
@@ -53,8 +49,7 @@ Future<void> getDeployedContract() async {
 
 /// This will help us to find all the [public functions] defined by the [contract]
 late DeployedContract contract;
-late ContractFunction addUser,
-    getUser;
+late ContractFunction addUser, getUser, addPoll;
 
 Future<void> getContractFunctions() async {
   contract = DeployedContract(
@@ -67,9 +62,9 @@ Future<void> getContractFunctions() async {
 /// This will call a [functionName] with [functionArgs] as parameters
 /// defined in the [contract] and returns its result
 Future<List<dynamic>> readContract(
-    ContractFunction functionName,
-    List<dynamic> functionArgs,
-    ) async {
+  ContractFunction functionName,
+  List<dynamic> functionArgs,
+) async {
   var queryResult = await ethClient.call(
     contract: contract,
     function: functionName,
@@ -82,9 +77,9 @@ Future<List<dynamic>> readContract(
 /// Signs the given transaction using the keys supplied in the [credentials] object
 /// to upload it to the client so that it can be executed
 Future<void> writeContract(
-    ContractFunction functionName,
-    List<dynamic> functionArgs,
-    ) async {
+  ContractFunction functionName,
+  List<dynamic> functionArgs,
+) async {
   await ethClient.sendTransaction(
     credentials,
     Transaction.callContract(
@@ -99,7 +94,12 @@ Future<void> writeUser() async {
   writeContract(addUser, ['abc', 'abc', 'abc']);
 }
 
-Future<void> readUser() async{
+Future<void> readUser() async {
   print(await readContract(getUser, ['abc']));
+}
 
+Future<void> createPoll(String name, int phoneNo, List candidateList,
+    int startTime, int endTime) async {
+  return writeContract(
+      addPoll, [name, phoneNo, candidateList, startTime, endTime]);
 }

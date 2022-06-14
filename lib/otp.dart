@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:vote_io_frontend/dashboard_1.dart';
 import 'package:vote_io_frontend/regDetails.dart';
 
 class OTP extends StatefulWidget {
@@ -213,7 +214,12 @@ class _OTPState extends State<OTP> {
                       Map res = json.decode(response.body);
                       print(res);
 
-                      // verifyOtp(context, otp, phoneNo);
+                      if (res["message"] == "OTP correct") {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Dashboard1()),
+                        );
+                      }
                     },
                   ),
                 ),
