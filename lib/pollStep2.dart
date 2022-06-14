@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vote_io_frontend/addCandidate.dart';
+import 'package:vote_io_frontend/blockchain/blockchainSetup.dart';
 
 class pollStep2 extends StatefulWidget {
   const pollStep2(
@@ -18,44 +19,9 @@ class pollStep2 extends StatefulWidget {
 }
 
 class _pollStep2State extends State<pollStep2> {
-  List<Map> createdPolls = [
-    {'title': 'Election1', 'date': 'date', 'time_left': 'time'},
-    {'title': 'Election1', 'date': 'date', 'time_left': 'time'},
-    {'title': 'Election1', 'date': 'date', 'time_left': 'time'},
-  ];
+  int cCount = 0;
 
-  List<Map> candidate = [
-    {
-      'id': 1,
-      'name': 'AAA',
-      'description': 'This is candidate 1',
-      'picture': 'assets/red.png'
-    },
-    {
-      'id': 2,
-      'name': 'BBB',
-      'description': 'This is candidate 2',
-      'picture': 'assets/blue.png'
-    },
-    {
-      'id': 3,
-      'name': 'CCC',
-      'description': 'This is candidate 3',
-      'picture': 'assets/green.png'
-    },
-    {
-      'id': 1,
-      'name': 'AAA',
-      'description': 'This is candidate 1',
-      'picture': 'assets/red.png'
-    },
-    {
-      'id': 2,
-      'name': 'BBB',
-      'description': 'This is candidate 2',
-      'picture': 'assets/blue.png'
-    },
-  ];
+  List<dynamic> candidate = [];
 
   @override
   Widget build(BuildContext context) {
@@ -148,8 +114,8 @@ class _pollStep2State extends State<pollStep2> {
                                               borderRadius:
                                                   BorderRadius.circular(10),
                                               image: DecorationImage(
-                                                  image: AssetImage(
-                                                      '${candidate[index]['picture']}'))),
+                                                  image: NetworkImage(
+                                                      '${candidate[index][4]}'))),
                                         ),
                                         SizedBox(
                                           height: 20,
@@ -163,7 +129,7 @@ class _pollStep2State extends State<pollStep2> {
                                           MainAxisAlignment.start,
                                       children: [
                                         Text(
-                                          '${candidate[index]['name']}',
+                                          '${candidate[index][1]}',
                                           style: TextStyle(
                                               fontFamily: 'montserrat',
                                               fontWeight: FontWeight.w700,
@@ -184,7 +150,7 @@ class _pollStep2State extends State<pollStep2> {
                                           CrossAxisAlignment.end,
                                       children: [
                                         Text(
-                                          '${candidate[index]['id']}',
+                                          '${candidate[index][0] + 1}',
                                           style: TextStyle(
                                               fontFamily: 'montserrat',
                                               fontWeight: FontWeight.w700,
@@ -228,9 +194,16 @@ class _pollStep2State extends State<pollStep2> {
                           MaterialPageRoute(
                               builder: (context) => AddCandidate(
                                     candidates: candidate,
+                                    number: cCount,
                                   )),
                         ).then((_) {
                           print(candidate);
+                          setState(() {
+                            if (candidate.length != cCount) {
+                              cCount += 1;
+                            }
+                            candidate = candidate;
+                          });
                         });
                       },
                     ),
@@ -259,12 +232,16 @@ class _pollStep2State extends State<pollStep2> {
                             fontFamily: 'poppins',
                             fontWeight: FontWeight.bold),
                       ),
-                      onPressed: () {
-                        Navigator.pushReplacementNamed(context, 'dialogBox',
-                            arguments: {
-                              'title': 'Successful',
-                              'content': 'You have successfully created a poll'
-                            });
+                      onPressed: () async {
+                        dynamic reply = await createPoll(widget.pollName,
+                            1234567890, candidate, 20000, 40000);
+                        print(reply);
+
+                        // Navigator.pushReplacementNamed(context, 'dialogBox',
+                        //     arguments: {
+                        //       'title': 'Successful',
+                        //       'content': 'You have successfully created a poll'
+                        //     });
                       },
                     ),
                     decoration: BoxDecoration(

@@ -20,7 +20,7 @@ import 'blockchain/blockchainSetup.dart';
 void main() async {
   runApp(
     MaterialApp(
-      initialRoute: 'addCandidate',
+      initialRoute: 'createPoll',
       routes: {
         'login': (context) => Login(),
         'register': (context) => Register(),
@@ -38,6 +38,7 @@ void main() async {
         'adminPoll': (context) => AdminPoll(),
         'addCandidate': (context) => AddCandidate(
               candidates: [{}, {}],
+              number: 0,
             ),
         'pollStep2': (context) => pollStep2(
               desc: '',

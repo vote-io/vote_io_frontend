@@ -6,8 +6,10 @@ import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 
 class AddCandidate extends StatefulWidget {
-  const AddCandidate({Key? key, required this.candidates}) : super(key: key);
-  final List<Map> candidates;
+  const AddCandidate({Key? key, required this.candidates, required this.number})
+      : super(key: key);
+  final List<dynamic> candidates;
+  final int number;
 
   @override
   State<AddCandidate> createState() => _AddCandidateState();
@@ -89,6 +91,7 @@ class _AddCandidateState extends State<AddCandidate> {
                     child: SingleChildScrollView(
                       child: AddCandidate_Form(
                         candidates: widget.candidates,
+                        number: widget.number,
                       ),
                     ),
                   ),
@@ -104,9 +107,11 @@ class _AddCandidateState extends State<AddCandidate> {
 }
 
 class AddCandidate_Form extends StatefulWidget {
-  const AddCandidate_Form({Key? key, required this.candidates})
+  const AddCandidate_Form(
+      {Key? key, required this.candidates, required this.number})
       : super(key: key);
-  final List<Map> candidates;
+  final List<dynamic> candidates;
+  final int number;
   @override
   State<AddCandidate_Form> createState() => _AddCandidate_FormState();
 }
@@ -120,12 +125,12 @@ class _AddCandidate_FormState extends State<AddCandidate_Form> {
   String imageUrl =
       "https://www.icmetl.org/wp-content/uploads/2020/11/user-icon-human-person-sign-vector-10206693.png";
 
-  Future<Map<String, dynamic>> uploadImage(String email, File ppic) async {
+  Future<Map<String, dynamic>> uploadImage(File ppic) async {
     //create multipart request for POST or PATCH method
-    var request = http.MultipartRequest("PATCH",
-        Uri.parse("https://bit-store-backend.herokuapp.com/user/profilepic"));
+    var request = http.MultipartRequest(
+        "POST", Uri.parse("http://localhost:3001/candidate/picture"));
     //add text fields
-    request.fields["email"] = email;
+
     //create multipart using filepath, string or bytes
     var pic = await http.MultipartFile.fromPath("ppic", ppic.path);
     //add multipart to request
@@ -186,15 +191,15 @@ class _AddCandidate_FormState extends State<AddCandidate_Form> {
                     onPressed: () async {
                       // _onLoading();
                       // Pick an image
-                      PickedFile? pickedFile = await ImagePicker().getImage(
-                        source: ImageSource.gallery,
-                        maxWidth: 1800,
-                        maxHeight: 1800,
-                      );
+                      final picker = ImagePicker();
+                      final XFile? pickedFile = (await picker.pickImage(
+                          source: ImageSource.gallery, imageQuality: 80));
                       if (pickedFile != null) {
                         File imageFile = File(pickedFile.path);
-                        // dynamic res = await uploadImage(email, imageFile);
-                        print("image add success");
+                        dynamic res = await uploadImage(imageFile);
+                        setState(() {
+                          imageUrl = res['link'];
+                        });
                       }
                     },
                     child: Icon(Icons.add, color: Colors.white),
@@ -284,39 +289,6 @@ class _AddCandidate_FormState extends State<AddCandidate_Form> {
             ],
           ),
           SizedBox(
-            height: 10,
-          ),
-          Text(
-            'Upload Picture :)',
-            style: TextStyle(
-              fontFamily: 'poppins',
-              fontWeight: FontWeight.w500,
-              color: Colors.white,
-              fontSize: 18,
-            ),
-          ),
-          Container(
-            width: 300 + 100 - 50,
-            height: 54,
-            padding: const EdgeInsets.fromLTRB(40.0, 10, 40, 0),
-            child: TextFormField(
-              decoration: InputDecoration(
-                hintText: 'Candidate Picture',
-                hintStyle: TextStyle(color: Color.fromRGBO(170, 170, 170, 1)),
-                border: OutlineInputBorder(),
-                fillColor: Color.fromRGBO(43, 43, 43, 1),
-                filled: true,
-                enabledBorder: InputBorder.none,
-              ),
-            ),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Color.fromRGBO(43, 43, 43, 1)),
-          ),
-          SizedBox(
-            height: 20.0,
-          ),
-          SizedBox(
             height: 20,
           ),
           Row(
@@ -336,18 +308,12 @@ class _AddCandidate_FormState extends State<AddCandidate_Form> {
                         fontWeight: FontWeight.bold),
                   ),
                   onPressed: () {
-                    // Navigator.pushReplacementNamed(context, 'dialogBox',
-                    //     arguments: {
-                    //       'title': 'Successful',
-                    //       'content':
-                    //           'You have successfully added a candidate to the poll'
-                    //     });
-
                     String name = nameController.text;
                     String desc = descController.text;
 
-                    List<Map> cMap = widget.candidates;
-                    cMap.add({"name": name, "description": desc});
+                    List<dynamic> cMap = widget.candidates;
+
+                    cMap.add([widget.number, name, desc, 0, imageUrl]);
                     Navigator.pop(context);
                   },
                 ),
