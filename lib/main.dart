@@ -16,7 +16,7 @@ import 'blockchain/blockchainSetup.dart';
 void main() async {
   runApp(
     MaterialApp(
-      initialRoute: 'dashboard2',
+      initialRoute: 'dashboard1',
       routes: {
         'login': (context) => Login(),
         'register': (context) => Register(),
