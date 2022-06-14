@@ -24,7 +24,7 @@ Future<void> initialBlockChainSetup() async {
 }
 
 String privateKey =
-    '3a6ca58027fd4736913e6ae9bebb7c59fa00674bfbac595f2a8ecd2229cbb431';
+    '35fd99f288dec0f6af17f40d5ed0741abbcb8b6c1a81ab7a48c0786f27d42036';
 late Credentials credentials;
 late EthereumAddress myAddress;
 
@@ -44,12 +44,18 @@ Future<void> getDeployedContract() async {
   abi = jsonEncode(abiJson['abi']);
 
   contractAddress =
-      EthereumAddress.fromHex(abiJson['networks']['5777']['address']);
+      EthereumAddress.fromHex(abiJson['networks']['1337']['address']);
 }
 
 /// This will help us to find all the [public functions] defined by the [contract]
 late DeployedContract contract;
-late ContractFunction addUser, getUser, addPoll;
+late ContractFunction addUser,
+    getUser,
+    addPoll,
+    getPolls,
+    joinAPoll,
+    joinedPollsList,
+    vote;
 
 Future<void> getContractFunctions() async {
   contract = DeployedContract(
@@ -58,6 +64,10 @@ Future<void> getContractFunctions() async {
   addUser = contract.function('addUser');
   getUser = contract.function('getUser');
   addPoll = contract.function('addPoll');
+  getPolls = contract.function('getPolls');
+  joinAPoll = contract.function('joinPoll');
+  joinedPollsList = contract.function('joinedPollsList');
+  vote = contract.function('vote');
 }
 
 /// This will call a [functionName] with [functionArgs] as parameters
@@ -99,8 +109,24 @@ Future<void> readUser() async {
   print(await readContract(getUser, ['abc']));
 }
 
-Future<dynamic> createPoll(String name, int phoneNo, List candidateList,
-    int startTime, int endTime) async {
+Future<dynamic> createPoll(String name, BigInt phoneNo, List candidateList,
+    BigInt startTime, BigInt endTime) async {
   return writeContract(
       addPoll, [name, phoneNo, candidateList, startTime, endTime]);
+}
+
+Future<List> getCreatedPolls(BigInt phoneNo) async {
+  return readContract(getPolls, [phoneNo]);
+}
+
+Future<List> getJoinedPolls(BigInt phoneNo) async {
+  return readContract(joinedPollsList, [phoneNo]);
+}
+
+Future<dynamic> joinPoll(BigInt phoneNo, BigInt pollId) async {
+  return writeContract(joinAPoll, [phoneNo, pollId]);
+}
+
+Future<dynamic> castVote(BigInt phoneNo, BigInt pollId, BigInt candid) async {
+  return writeContract(vote, [phoneNo, pollId, candid]);
 }

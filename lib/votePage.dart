@@ -1,26 +1,59 @@
-import 'package:expansion_card/expansion_card.dart';
 import 'package:flutter/material.dart';
+import 'package:vote_io_frontend/candidateCard.dart';
 
 class VotePage extends StatefulWidget {
-  const VotePage({Key? key}) : super(key: key);
-
+  const VotePage(
+      {Key? key,
+      required this.candidates,
+      required this.pollId,
+      required this.votingRange})
+      : super(key: key);
+  final List candidates;
+  final int pollId;
+  final List votingRange;
   @override
   State<VotePage> createState() => _VotePageState();
 }
 
 class _VotePageState extends State<VotePage> {
-
-  List<Map> candidate=[
-    {'id':1,'name':'AAA','description':'This is candidate 1','picture':'assets/red.png'},
-    {'id':2,'name':'BBB','description':'This is candidate 2','picture':'assets/blue.png'},
-    {'id':3,'name':'CCC','description':'This is candidate 3','picture':'assets/green.png'},
-    {'id':1,'name':'AAA','description':'This is candidate 1','picture':'assets/red.png'},
-    {'id':2,'name':'BBB','description':'This is candidate 2','picture':'assets/blue.png'},
+  List<Map> candidate = [
+    {
+      'id': 1,
+      'name': 'AAA',
+      'description': 'This is candidate 1',
+      'picture': 'assets/red.png'
+    },
+    {
+      'id': 2,
+      'name': 'BBB',
+      'description': 'This is candidate 2',
+      'picture': 'assets/blue.png'
+    },
+    {
+      'id': 3,
+      'name': 'CCC',
+      'description': 'This is candidate 3',
+      'picture': 'assets/green.png'
+    },
+    {
+      'id': 1,
+      'name': 'AAA',
+      'description': 'This is candidate 1',
+      'picture': 'assets/red.png'
+    },
+    {
+      'id': 2,
+      'name': 'BBB',
+      'description': 'This is candidate 2',
+      'picture': 'assets/blue.png'
+    },
   ];
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: Scaffold(
+    List candidate = widget.candidates;
+    return SafeArea(
+        child: Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
         color: Colors.black87,
@@ -29,69 +62,75 @@ class _VotePageState extends State<VotePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-
                 Image.asset('assets/logo.png'),
-                Text('VoteHub',
+                Text(
+                  'VoteHub',
                   style: TextStyle(
                       fontSize: 24,
                       fontFamily: 'poppins',
                       fontWeight: FontWeight.w600,
-                      color: Color.fromRGBO(73, 132, 224, 1)
-                  ),)
+                      color: Color.fromRGBO(73, 132, 224, 1)),
+                )
               ],
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             Container(
               child: Column(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Vote now',
+                      Text(
+                        'Vote now',
                         style: TextStyle(
                           color: Color.fromRGBO(255, 255, 255, 1),
                           fontSize: 42,
                           fontFamily: 'poppins',
                           fontWeight: FontWeight.w600,
-                        ),)
+                        ),
+                      )
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('The candidates for the poll are',
+                      Text(
+                        'The candidates for the poll are',
                         style: TextStyle(
-                          color: Color.fromRGBO(170,170,170, 1),
+                          color: Color.fromRGBO(170, 170, 170, 1),
                           fontSize: 18,
                           fontFamily: 'poppins',
                           fontWeight: FontWeight.w600,
-                        ),)
+                        ),
+                      )
                     ],
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             Container(
               child: Padding(
-                padding:
-                const EdgeInsets.fromLTRB(20, 20, 20, 20),
+                padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                      mainAxisAlignment:
-                      MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(
-                          crossAxisAlignment:
-                          CrossAxisAlignment.start,
-                          mainAxisAlignment:
-                          MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Column(
                               children: [
@@ -101,8 +140,7 @@ class _VotePageState extends State<VotePage> {
                                       fontFamily: 'montserrat',
                                       fontWeight: FontWeight.w700,
                                       fontSize: 20,
-                                      color: Color.fromRGBO(
-                                          251, 251, 251, 1)),
+                                      color: Color.fromRGBO(251, 251, 251, 1)),
                                 ),
                                 Text(
                                   'Picture',
@@ -110,19 +148,15 @@ class _VotePageState extends State<VotePage> {
                                       fontFamily: 'montserrat',
                                       fontWeight: FontWeight.w700,
                                       fontSize: 20,
-                                      color: Color.fromRGBO(
-                                          251, 251, 251, 1)),
+                                      color: Color.fromRGBO(251, 251, 251, 1)),
                                 ),
                               ],
                             ),
-
                           ],
                         ),
                         Column(
-                          crossAxisAlignment:
-                          CrossAxisAlignment.center,
-                          mainAxisAlignment:
-                          MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Column(
                               children: [
@@ -132,8 +166,7 @@ class _VotePageState extends State<VotePage> {
                                       fontFamily: 'montserrat',
                                       fontWeight: FontWeight.w700,
                                       fontSize: 20,
-                                      color: Color.fromRGBO(
-                                          251, 251, 251, 1)),
+                                      color: Color.fromRGBO(251, 251, 251, 1)),
                                 ),
                                 Text(
                                   'Name',
@@ -141,8 +174,7 @@ class _VotePageState extends State<VotePage> {
                                       fontFamily: 'montserrat',
                                       fontWeight: FontWeight.w700,
                                       fontSize: 20,
-                                      color: Color.fromRGBO(
-                                          251, 251, 251, 1)),
+                                      color: Color.fromRGBO(251, 251, 251, 1)),
                                 ),
                               ],
                             ),
@@ -150,8 +182,7 @@ class _VotePageState extends State<VotePage> {
                           ],
                         ),
                         Column(
-                          crossAxisAlignment:
-                          CrossAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
                               'Candidate',
@@ -159,8 +190,7 @@ class _VotePageState extends State<VotePage> {
                                   fontFamily: 'montserrat',
                                   fontWeight: FontWeight.w700,
                                   fontSize: 18,
-                                  color: Color.fromRGBO(
-                                      251, 251, 251, 1)),
+                                  color: Color.fromRGBO(251, 251, 251, 1)),
                               textAlign: TextAlign.end,
                             ),
                             Text(
@@ -169,8 +199,7 @@ class _VotePageState extends State<VotePage> {
                                   fontFamily: 'montserrat',
                                   fontWeight: FontWeight.w700,
                                   fontSize: 20,
-                                  color: Color.fromRGBO(
-                                      251, 251, 251, 1)),
+                                  color: Color.fromRGBO(251, 251, 251, 1)),
                             ),
                           ],
                         ),
@@ -188,42 +217,58 @@ class _VotePageState extends State<VotePage> {
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, 'candidate_card', arguments: candidate[index]);
-                      },
-                      child: Card(
-                        color: Color.fromRGBO(38, 38, 38, 1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        elevation: 10,
+                    child: Card(
+                      color: Color.fromRGBO(38, 38, 38, 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      elevation: 10,
+                      child: GestureDetector(
+                        onTap: () {
+                          if (DateTime.now().toUtc().millisecondsSinceEpoch <
+                              widget.votingRange[0].toInt()) {
+                            Navigator.pushReplacementNamed(context, 'dialogBox',
+                                arguments: {
+                                  'title': "Please wait",
+                                  'content':
+                                      "The vote timing hasn't started yet, please wait"
+                                });
+                          } else {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CandidateCard(
+                                        data: candidate[index],
+                                        pollId: widget.pollId,
+                                      )),
+                            );
+                          }
+                        },
                         child: Container(
                           child: Padding(
-                            padding:
-                            const EdgeInsets.fromLTRB(20, 20, 20, 20),
+                            padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Column(
                                       crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                          CrossAxisAlignment.start,
                                       mainAxisAlignment:
-                                      MainAxisAlignment.center,
+                                          MainAxisAlignment.center,
                                       children: [
                                         Container(
-                                          height: 25+5,
-                                          width: 25+5,
+                                          height: 25 + 5,
+                                          width: 25 + 5,
                                           decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(10),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
                                               image: DecorationImage(
-                                            image: AssetImage('${candidate[index]['picture']}')
-                                            )
-                                          ),
+                                                  image: NetworkImage(
+                                                      '${candidate[index][4]}'))),
                                         ),
                                         SizedBox(
                                           height: 20,
@@ -232,12 +277,12 @@ class _VotePageState extends State<VotePage> {
                                     ),
                                     Column(
                                       crossAxisAlignment:
-                                      CrossAxisAlignment.center,
+                                          CrossAxisAlignment.center,
                                       mainAxisAlignment:
-                                      MainAxisAlignment.start,
+                                          MainAxisAlignment.start,
                                       children: [
                                         Text(
-                                          '${candidate[index]['name']}',
+                                          '${candidate[index][1]}',
                                           style: TextStyle(
                                               fontFamily: 'montserrat',
                                               fontWeight: FontWeight.w700,
@@ -255,10 +300,10 @@ class _VotePageState extends State<VotePage> {
                                     ),
                                     Column(
                                       crossAxisAlignment:
-                                      CrossAxisAlignment.end,
+                                          CrossAxisAlignment.end,
                                       children: [
                                         Text(
-                                          '${candidate[index]['id']}',
+                                          '${candidate[index][0].toInt() + 1}',
                                           style: TextStyle(
                                               fontFamily: 'montserrat',
                                               fontWeight: FontWeight.w700,
@@ -280,8 +325,7 @@ class _VotePageState extends State<VotePage> {
                   );
                 },
               ),
-            )
-
+            ),
           ],
         ),
       ),

@@ -7,12 +7,14 @@ class pollStep2 extends StatefulWidget {
       {Key? key,
       required this.pollName,
       required this.desc,
-      required this.date})
+      required this.startDate,
+      required this.endDate})
       : super(key: key);
 
   final String pollName;
   final String desc;
-  final DateTime date;
+  final int startDate;
+  final int endDate;
 
   @override
   State<pollStep2> createState() => _pollStep2State();
@@ -25,10 +27,6 @@ class _pollStep2State extends State<pollStep2> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.pollName);
-    print(widget.desc);
-    print(widget.date);
-
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
@@ -150,7 +148,7 @@ class _pollStep2State extends State<pollStep2> {
                                           CrossAxisAlignment.end,
                                       children: [
                                         Text(
-                                          '${candidate[index][0] + 1}',
+                                          '${candidate[index][0].toInt() + 1}',
                                           style: TextStyle(
                                               fontFamily: 'montserrat',
                                               fontWeight: FontWeight.w700,
@@ -233,8 +231,12 @@ class _pollStep2State extends State<pollStep2> {
                             fontWeight: FontWeight.bold),
                       ),
                       onPressed: () async {
-                        dynamic reply = await createPoll(widget.pollName,
-                            1234567890, candidate, 20000, 40000);
+                        dynamic reply = await createPoll(
+                            widget.pollName,
+                            BigInt.from(12345),
+                            candidate,
+                            BigInt.from(widget.startDate),
+                            BigInt.from(widget.endDate));
                         print(reply);
 
                         // Navigator.pushReplacementNamed(context, 'dialogBox',

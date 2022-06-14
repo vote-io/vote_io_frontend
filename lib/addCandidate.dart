@@ -313,7 +313,13 @@ class _AddCandidate_FormState extends State<AddCandidate_Form> {
 
                     List<dynamic> cMap = widget.candidates;
 
-                    cMap.add([widget.number, name, desc, 0, imageUrl]);
+                    cMap.add([
+                      BigInt.from(widget.number),
+                      name,
+                      desc,
+                      BigInt.from(0),
+                      imageUrl
+                    ]);
                     Navigator.pop(context);
                   },
                 ),
