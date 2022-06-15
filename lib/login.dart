@@ -38,17 +38,11 @@ class _LoginState extends State<Login> {
           children: [
             // SizedBox(height: 30),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                SizedBox(
+                  width: 15,
+                ),
                 Image.asset('assets/logo.png'),
-                Text(
-                  'VoteHub',
-                  style: TextStyle(
-                      fontSize: 24,
-                      fontFamily: 'poppins',
-                      fontWeight: FontWeight.w600,
-                      color: Color.fromRGBO(73, 132, 224, 1)),
-                )
               ],
             ),
             // SizedBox(height: 25,),

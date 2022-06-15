@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vote_io_frontend/DialogBox.dart';
 import 'package:vote_io_frontend/addCandidate.dart';
 import 'package:vote_io_frontend/blockchain/blockchainSetup.dart';
 
@@ -8,13 +9,15 @@ class pollStep2 extends StatefulWidget {
       required this.pollName,
       required this.desc,
       required this.startDate,
-      required this.endDate})
+      required this.endDate,
+      required this.phoneNo})
       : super(key: key);
 
   final String pollName;
   final String desc;
   final int startDate;
   final int endDate;
+  final int phoneNo;
 
   @override
   State<pollStep2> createState() => _pollStep2State();
@@ -239,11 +242,15 @@ class _pollStep2State extends State<pollStep2> {
                             BigInt.from(widget.endDate));
                         print(reply);
 
-                        // Navigator.pushReplacementNamed(context, 'dialogBox',
-                        //     arguments: {
-                        //       'title': 'Successful',
-                        //       'content': 'You have successfully created a poll'
-                        //     });
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DialogBox(
+                                phoneNo: widget.phoneNo,
+                                title: 'Successful',
+                                content: 'You have successfully created a poll',
+                              ),
+                            ));
                       },
                     ),
                     decoration: BoxDecoration(

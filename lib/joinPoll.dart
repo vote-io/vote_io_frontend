@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:vote_io_frontend/blockchain/blockchainSetup.dart';
 
+import 'dashboard_2.dart';
+
 class JoinPoll extends StatefulWidget {
-  const JoinPoll({Key? key}) : super(key: key);
+  const JoinPoll({Key? key, required this.phoneNo}) : super(key: key);
+  final int phoneNo;
 
   @override
   State<JoinPoll> createState() => _JoinPollState();
@@ -160,15 +163,15 @@ class _JoinPollState extends State<JoinPoll> {
                             BigInt pollId =
                                 BigInt.from(int.parse(idController.text));
 
-                            dynamic res = joinPoll(BigInt.from(123), pollId);
+                            dynamic res =
+                                joinPoll(BigInt.from(widget.phoneNo), pollId);
                             print(res);
 
-                            // Navigator.pushReplacementNamed(context, 'dialogBox',
-                            //     arguments: {
-                            //       'title': 'Successful',
-                            //       'content':
-                            //           'You have successfully registered to vote for this poll. Find your poll on the dashboard.'
-                            //     });
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        Dashboard2(phoneNo: widget.phoneNo)));
                           },
                         ),
                         decoration: BoxDecoration(

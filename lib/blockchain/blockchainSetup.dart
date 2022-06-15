@@ -24,7 +24,7 @@ Future<void> initialBlockChainSetup() async {
 }
 
 String privateKey =
-    '35fd99f288dec0f6af17f40d5ed0741abbcb8b6c1a81ab7a48c0786f27d42036';
+    'a02a39509ad1eead0bcfb77c7702f736aafd8cdc30b1918911219e0c7b968b43';
 late Credentials credentials;
 late EthereumAddress myAddress;
 
@@ -111,7 +111,7 @@ Future<void> readUser() async {
 
 Future<dynamic> createPoll(String name, BigInt phoneNo, List candidateList,
     BigInt startTime, BigInt endTime) async {
-  return writeContract(
+  return await writeContract(
       addPoll, [name, phoneNo, candidateList, startTime, endTime]);
 }
 

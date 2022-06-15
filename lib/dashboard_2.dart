@@ -3,8 +3,12 @@ import 'package:vote_io_frontend/blockchain/blockchainSetup.dart';
 import 'package:vote_io_frontend/results.dart';
 import 'package:vote_io_frontend/votePage.dart';
 
+import 'dashboard_1.dart';
+import 'joinPoll.dart';
+
 class Dashboard2 extends StatefulWidget {
-  const Dashboard2({Key? key}) : super(key: key);
+  const Dashboard2({Key? key, required this.phoneNo}) : super(key: key);
+  final int phoneNo;
 
   @override
   State<Dashboard2> createState() => _Dashboard2State();
@@ -49,7 +53,9 @@ class _Dashboard2State extends State<Dashboard2> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -124,8 +130,11 @@ class _Dashboard2State extends State<Dashboard2> {
                                       fontWeight: FontWeight.w400),
                                 ),
                                 onPressed: () {
-                                  Navigator.pushReplacementNamed(
-                                      context, 'dashboard1');
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Dashboard1(
+                                              phoneNo: widget.phoneNo)));
                                 },
                               ),
                             ),
@@ -143,8 +152,11 @@ class _Dashboard2State extends State<Dashboard2> {
                                       fontWeight: FontWeight.w400),
                                 ),
                                 onPressed: () {
-                                  Navigator.pushReplacementNamed(
-                                      context, 'dashboard2');
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Dashboard2(
+                                              phoneNo: widget.phoneNo)));
                                 },
                               ),
                             ),
@@ -158,7 +170,7 @@ class _Dashboard2State extends State<Dashboard2> {
             ),
             Expanded(
               child: FutureBuilder(
-                  future: getJoinedPolls(BigInt.from(123)),
+                  future: getJoinedPolls(BigInt.from(widget.phoneNo)),
                   builder: (context, AsyncSnapshot snapshot) {
                     if (!snapshot.hasData) {
                       return Center(child: CircularProgressIndicator());
@@ -172,7 +184,7 @@ class _Dashboard2State extends State<Dashboard2> {
                                     const EdgeInsets.fromLTRB(0, 10, 10, 10),
                                 child: GestureDetector(
                                   onTap: () {
-                                    print(snapshot.data[0][index][0]);
+                                    print(snapshot.data[0][index]);
                                     if (DateTime.now()
                                                 .toUtc()
                                                 .millisecondsSinceEpoch >
@@ -183,23 +195,33 @@ class _Dashboard2State extends State<Dashboard2> {
                                                 .millisecondsSinceEpoch <
                                             snapshot.data[0][index][0][5]
                                                 .toInt()) {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => VotePage(
-                                                  candidates: snapshot.data[0]
-                                                      [index][0][3],
-                                                  pollId: snapshot.data[0]
-                                                          [index][0][0]
-                                                      .toInt(),
-                                                  votingRange: [
-                                                    snapshot.data[0][index][0]
-                                                        [4],
-                                                    snapshot.data[0][index][0]
-                                                        [5]
-                                                  ],
-                                                )),
-                                      );
+                                      if (snapshot.data[0][index][1] == false) {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => VotePage(
+                                                    candidates: snapshot.data[0]
+                                                        [index][0][3],
+                                                    pollId: snapshot.data[0]
+                                                            [index][0][0]
+                                                        .toInt(),
+                                                    votingRange: [
+                                                      snapshot.data[0][index][0]
+                                                          [4],
+                                                      snapshot.data[0][index][0]
+                                                          [5]
+                                                    ],
+                                                  )),
+                                        );
+                                      } else {
+                                        const snackBar = SnackBar(
+                                          content: Text('Already voted'),
+                                          backgroundColor: Colors.red,
+                                        );
+
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(snackBar);
+                                      }
                                     } else if (DateTime.now()
                                             .toUtc()
                                             .millisecondsSinceEpoch <
@@ -302,7 +324,11 @@ class _Dashboard2State extends State<Dashboard2> {
                           fontWeight: FontWeight.bold),
                     ),
                     onPressed: () {
-                      Navigator.pushReplacementNamed(context, 'joinPoll');
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  JoinPoll(phoneNo: widget.phoneNo)));
                     },
                   ),
                   decoration: BoxDecoration(

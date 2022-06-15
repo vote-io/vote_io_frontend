@@ -217,7 +217,10 @@ class _OTPState extends State<OTP> {
                       if (res["message"] == "OTP correct") {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Dashboard1()),
+                          MaterialPageRoute(
+                              builder: (context) => Dashboard1(
+                                    phoneNo: int.parse(phoneNo),
+                                  )),
                         );
                       }
                     },

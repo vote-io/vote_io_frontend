@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:vote_io_frontend/pollStep2.dart';
 
 class CreatePoll extends StatefulWidget {
-  const CreatePoll({Key? key}) : super(key: key);
+  const CreatePoll({Key? key, required this.phoneNo}) : super(key: key);
 
+  final int phoneNo;
   @override
   State<CreatePoll> createState() => _CreatePollState();
 }
@@ -84,7 +85,9 @@ class _CreatePollState extends State<CreatePoll> {
                   child: SizedBox(
                     height: 420,
                     child: SingleChildScrollView(
-                      child: create_poll_form(),
+                      child: create_poll_form(
+                        phoneNo: widget.phoneNo,
+                      ),
                     ),
                   ),
                 )
@@ -99,7 +102,8 @@ class _CreatePollState extends State<CreatePoll> {
 }
 
 class create_poll_form extends StatefulWidget {
-  const create_poll_form({Key? key}) : super(key: key);
+  const create_poll_form({Key? key, required this.phoneNo}) : super(key: key);
+  final int phoneNo;
 
   @override
   State<create_poll_form> createState() => _create_poll_formState();
@@ -341,15 +345,15 @@ class _create_poll_formState extends State<create_poll_form> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => pollStep2(
-                                pollName: name,
-                                desc: desc,
-                                startDate: selectedStartDate
-                                    .toUtc()
-                                    .millisecondsSinceEpoch,
-                                endDate: selectedEndDate
-                                    .toUtc()
-                                    .millisecondsSinceEpoch,
-                              )),
+                              pollName: name,
+                              desc: desc,
+                              startDate: selectedStartDate
+                                  .toUtc()
+                                  .millisecondsSinceEpoch,
+                              endDate: selectedEndDate
+                                  .toUtc()
+                                  .millisecondsSinceEpoch,
+                              phoneNo: widget.phoneNo)),
                     );
                   },
                 ),

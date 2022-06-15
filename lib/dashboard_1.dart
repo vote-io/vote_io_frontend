@@ -1,70 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:vote_io_frontend/blockchain/blockchainSetup.dart';
+import 'package:vote_io_frontend/createPoll.dart';
 
 import 'adminPoll.dart';
+import 'dashboard_2.dart';
 
 class Dashboard1 extends StatefulWidget {
-  const Dashboard1({Key? key}) : super(key: key);
+  const Dashboard1({Key? key, required this.phoneNo}) : super(key: key);
+  final int phoneNo;
 
   @override
   State<Dashboard1> createState() => _Dashboard1State();
 }
 
 class _Dashboard1State extends State<Dashboard1> {
-  // List<Map> createdPolls2 = [
-  //   {'title': 'Election1', 'date': 'date', 'time_left': 'time'},
-  //   {'title': 'Election1', 'date': 'date', 'time_left': 'time'},
-  //   {'title': 'Election1', 'date': 'date', 'time_left': 'time'},
-  // ];
-
-  List createdPolls = [
-    [
-      0,
-      "poll 1",
-      123,
-      [
-        [
-          0,
-          "some cand",
-          "I’ m wht",
-          0,
-          "https://www.icmetl.org/wp-content/uploads/2020/11/user-icon-human-person-sign-vector-10206693.png"
-        ]
-      ],
-      200,
-      400,
-      0
-    ],
-    [
-      1,
-      "poll 2",
-      123,
-      [
-        [
-          0,
-          "some name",
-          "desc",
-          0,
-          "https://storage.googleapis.com/download/storage/v1/b/fishing-backend.appspot.com/o/candidatePics%2Fa7806aa6-22cc-4593-a7a6-b47546fc028f.octet-stream?generation=1655210590561018&alt=media"
-        ],
-        [
-          1,
-          "candidate 2",
-          "some desc",
-          0,
-          "https://www.icmetl.org/wp-content/uploads/2020/11/user-icon-human-person-sign-vector-10206693.png"
-        ]
-      ],
-      200,
-      400,
-      0
-    ]
-  ];
-
-  dynamic getCPolls() async {
-    return getCreatedPolls(BigInt.from(123));
-  }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -74,12 +23,6 @@ class _Dashboard1State extends State<Dashboard1> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              'VoteHub',
-              style: TextStyle(
-                color: Color.fromRGBO(73, 132, 224, 1),
-              ),
-            ),
             TextButton(
               child: Icon(
                 Icons.account_circle_rounded,
@@ -97,7 +40,9 @@ class _Dashboard1State extends State<Dashboard1> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -172,8 +117,11 @@ class _Dashboard1State extends State<Dashboard1> {
                                       fontWeight: FontWeight.w400),
                                 ),
                                 onPressed: () {
-                                  Navigator.pushReplacementNamed(
-                                      context, 'dashboard1');
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Dashboard1(
+                                              phoneNo: widget.phoneNo)));
                                 },
                               ),
                             ),
@@ -191,8 +139,11 @@ class _Dashboard1State extends State<Dashboard1> {
                                       fontWeight: FontWeight.w400),
                                 ),
                                 onPressed: () {
-                                  Navigator.pushReplacementNamed(
-                                      context, 'dashboard2');
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Dashboard2(
+                                              phoneNo: widget.phoneNo)));
                                 },
                               ),
                             ),
@@ -206,7 +157,7 @@ class _Dashboard1State extends State<Dashboard1> {
             ),
             Expanded(
               child: FutureBuilder(
-                  future: getCreatedPolls(BigInt.from(12345)),
+                  future: getCreatedPolls(BigInt.from(widget.phoneNo)),
                   builder: (context, AsyncSnapshot snapshot) {
                     if (!snapshot.hasData) {
                       return Center(child: CircularProgressIndicator());
@@ -302,7 +253,12 @@ class _Dashboard1State extends State<Dashboard1> {
                           fontWeight: FontWeight.bold),
                     ),
                     onPressed: () {
-                      Navigator.pushReplacementNamed(context, 'createPoll');
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CreatePoll(
+                                    phoneNo: widget.phoneNo,
+                                  )));
                     },
                   ),
                   decoration: BoxDecoration(
