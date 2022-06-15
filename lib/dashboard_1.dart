@@ -93,10 +93,11 @@ class _Dashboard1State extends State<Dashboard1> {
         ),
       ),
       body: Container(
-        color: Colors.black54,
+        color: Colors.black87,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
+            SizedBox(height: 10,),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [

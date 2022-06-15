@@ -45,10 +45,11 @@ class _Dashboard2State extends State<Dashboard2> {
         ),
       ),
       body: Container(
-        color: Colors.black54,
+        color: Colors.black87,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+            SizedBox(height: 10,),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [

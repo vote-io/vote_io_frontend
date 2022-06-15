@@ -164,6 +164,9 @@ class _create_poll_formState extends State<create_poll_form> {
             height: 54,
             padding: const EdgeInsets.fromLTRB(40.0, 10, 40, 0),
             child: TextFormField(
+              style: const TextStyle(
+                color: Color(0xffAAAAAA),
+              ),
               controller: nameController,
               decoration: InputDecoration(
                 hintText: 'Name of Poll',
@@ -201,6 +204,9 @@ class _create_poll_formState extends State<create_poll_form> {
                 height: 54,
                 padding: const EdgeInsets.fromLTRB(40.0, 10, 40, 0),
                 child: TextFormField(
+                  style: const TextStyle(
+                    color: Color(0xffAAAAAA),
+                  ),
                   controller: descController,
                   decoration: InputDecoration(
                     hintText: 'Poll Description',
