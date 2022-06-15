@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vote_io_frontend/blockchain/blockchainSetup.dart';
+import 'package:vote_io_frontend/results.dart';
 import 'package:vote_io_frontend/votePage.dart';
 
 class Dashboard2 extends StatefulWidget {
@@ -161,7 +162,6 @@ class _Dashboard2State extends State<Dashboard2> {
                     if (!snapshot.hasData) {
                       return Center(child: CircularProgressIndicator());
                     } else {
-                      print(snapshot.data[0]);
                       return Container(
                         child: ListView.builder(
                             itemCount: snapshot.data[0].length,
@@ -171,21 +171,67 @@ class _Dashboard2State extends State<Dashboard2> {
                                     const EdgeInsets.fromLTRB(0, 10, 10, 10),
                                 child: GestureDetector(
                                   onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => VotePage(
-                                                candidates: snapshot.data[0]
-                                                    [index][0][3],
-                                                pollId: snapshot.data[0][index]
-                                                        [0][0]
-                                                    .toInt(),
-                                                votingRange: [
-                                                  snapshot.data[0][index][0][4],
-                                                  snapshot.data[0][index][0][5]
-                                                ],
-                                              )),
-                                    );
+                                    print(snapshot.data[0][index][0]);
+                                    if (DateTime.now()
+                                                .toUtc()
+                                                .millisecondsSinceEpoch >
+                                            snapshot.data[0][index][0][4]
+                                                .toInt() &&
+                                        DateTime.now()
+                                                .toUtc()
+                                                .millisecondsSinceEpoch <
+                                            snapshot.data[0][index][0][5]
+                                                .toInt()) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => VotePage(
+                                                  candidates: snapshot.data[0]
+                                                      [index][0][3],
+                                                  pollId: snapshot.data[0]
+                                                          [index][0][0]
+                                                      .toInt(),
+                                                  votingRange: [
+                                                    snapshot.data[0][index][0]
+                                                        [4],
+                                                    snapshot.data[0][index][0]
+                                                        [5]
+                                                  ],
+                                                )),
+                                      );
+                                    } else if (DateTime.now()
+                                            .toUtc()
+                                            .millisecondsSinceEpoch <
+                                        snapshot.data[0][index][0][4].toInt()) {
+                                      const snackBar = SnackBar(
+                                        content: Text(
+                                            'The poll has not started yet!!'),
+                                        backgroundColor: Colors.red,
+                                      );
+
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(snackBar);
+                                    } else {
+                                      String winnerName = '';
+                                      String winnerId = '';
+                                      BigInt maxNumberOfVotes = BigInt.from(0);
+                                      for (List x in snapshot.data[0][index][0]
+                                          [3]) {
+                                        if (x[3] > maxNumberOfVotes) {
+                                          winnerName = x[1];
+                                          winnerId = x[0].toString();
+                                        }
+                                      }
+                                      //print(widget.candidates);
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Results(
+                                                  candidateName: winnerName,
+                                                  candidateId: winnerId,
+                                                )),
+                                      );
+                                    }
                                   },
                                   child: Container(
                                     margin: EdgeInsets.fromLTRB(10, 20, 10, 0),

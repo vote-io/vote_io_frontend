@@ -15,7 +15,7 @@ class _ResultsState extends State<Results> {
   Widget build(BuildContext context) {
     String title = "Results are out!!!";
     String content =
-        "the winner of the poll is candidate ${widget.candidateName} with ID ${widget.candidateName}";
+        "the winner of the poll is candidate ${widget.candidateName} with ID ${widget.candidateId}";
     return SafeArea(
       child: Scaffold(
         body: Container(

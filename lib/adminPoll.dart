@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:vote_io_frontend/results.dart';
 
 class AdminPoll extends StatefulWidget {
-  const AdminPoll({Key? key, required this.candidates}) : super(key: key);
+  const AdminPoll(
+      {Key? key,
+      required this.candidates,
+      required this.startTime,
+      required this.endTime})
+      : super(key: key);
   final List candidates;
+  final BigInt startTime;
+  final BigInt endTime;
 
   @override
   State<AdminPoll> createState() => _AdminPollState();
@@ -62,15 +70,25 @@ class _AdminPollState extends State<AdminPoll> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                TextButton(
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    size: 35,
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                Spacer(),
                 Image.asset('assets/logo.png'),
-                Text(
-                  'VoteHub',
-                  style: TextStyle(
-                      fontSize: 24,
-                      fontFamily: 'poppins',
-                      fontWeight: FontWeight.w600,
-                      color: Color.fromRGBO(73, 132, 224, 1)),
-                )
+                // Text(
+                //   'VoteHub',
+                //   style: TextStyle(
+                //       fontSize: 24,
+                //       fontFamily: 'poppins',
+                //       fontWeight: FontWeight.w600,
+                //       color: Color.fromRGBO(73, 132, 224, 1)),
+                // )
               ],
             ),
             SizedBox(
@@ -295,32 +313,32 @@ class _AdminPollState extends State<AdminPoll> {
                 },
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 300 + 100 - 50,
-                  height: 54,
-                  padding: const EdgeInsets.fromLTRB(40.0, 10, 40, 0),
-                  child: TextButton(
-                    child: Text(
-                      'Add a new candidate',
-                      style: TextStyle(
-                          color: Color.fromRGBO(255, 255, 255, 1),
-                          fontSize: 20,
-                          fontFamily: 'poppins',
-                          fontWeight: FontWeight.bold),
-                    ),
-                    onPressed: () {
-                      Navigator.pushReplacementNamed(context, 'addCandidate');
-                    },
-                  ),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Color.fromRGBO(22, 86, 185, 1)),
-                ),
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     Container(
+            //       width: 300 + 100 - 50,
+            //       height: 54,
+            //       padding: const EdgeInsets.fromLTRB(40.0, 10, 40, 0),
+            //       child: TextButton(
+            //         child: Text(
+            //           'Add a new candidate',
+            //           style: TextStyle(
+            //               color: Color.fromRGBO(255, 255, 255, 1),
+            //               fontSize: 20,
+            //               fontFamily: 'poppins',
+            //               fontWeight: FontWeight.bold),
+            //         ),
+            //         onPressed: () {
+            //           Navigator.pushReplacementNamed(context, 'addCandidate');
+            //         },
+            //       ),
+            //       decoration: BoxDecoration(
+            //           borderRadius: BorderRadius.circular(10),
+            //           color: Color.fromRGBO(22, 86, 185, 1)),
+            //     ),
+            //   ],
+            // ),
             SizedBox(
               height: 20,
             ),
@@ -333,7 +351,7 @@ class _AdminPollState extends State<AdminPoll> {
                   padding: const EdgeInsets.fromLTRB(40.0, 10, 40, 0),
                   child: TextButton(
                     child: Text(
-                      'Declare Results',
+                      'View Results',
                       style: TextStyle(
                           color: Color.fromRGBO(255, 255, 255, 1),
                           fontSize: 20,
@@ -341,7 +359,34 @@ class _AdminPollState extends State<AdminPoll> {
                           fontWeight: FontWeight.bold),
                     ),
                     onPressed: () {
-                      Navigator.pushReplacementNamed(context, 'declareResult');
+                      if (DateTime.now().toUtc().millisecondsSinceEpoch >
+                          widget.endTime.toInt()) {
+                        String winnerName = '';
+                        String winnerId = '';
+                        BigInt maxNumberOfVotes = BigInt.from(0);
+                        for (List x in widget.candidates) {
+                          if (x[3] > maxNumberOfVotes) {
+                            winnerName = x[1];
+                            winnerId = x[0].toString();
+                          }
+                        }
+                        //print(widget.candidates);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Results(
+                                    candidateName: winnerName,
+                                    candidateId: winnerId,
+                                  )),
+                        );
+                      } else {
+                        const snackBar = SnackBar(
+                          content: Text('The poll has not ended yet!!'),
+                          backgroundColor: Colors.red,
+                        );
+
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      }
                     },
                   ),
                   decoration: BoxDecoration(

@@ -32,15 +32,17 @@ class _CandidateCardState extends State<CandidateCard> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                TextButton(
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    size: 35,
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                Spacer(),
                 Image.asset('assets/logo.png'),
-                Text(
-                  'VoteHub',
-                  style: TextStyle(
-                      fontSize: 24,
-                      fontFamily: 'poppins',
-                      fontWeight: FontWeight.w600,
-                      color: Color.fromRGBO(73, 132, 224, 1)),
-                )
               ],
             ),
             SizedBox(

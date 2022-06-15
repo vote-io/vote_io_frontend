@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vote_io_frontend/adminPoll.dart';
 import 'package:vote_io_frontend/blockchain/blockchainSetup.dart';
+
+import 'adminPoll.dart';
 
 class Dashboard1 extends StatefulWidget {
   const Dashboard1({Key? key}) : super(key: key);
@@ -218,12 +219,17 @@ class _Dashboard1State extends State<Dashboard1> {
                                     const EdgeInsets.fromLTRB(0, 10, 10, 10),
                                 child: GestureDetector(
                                   onTap: () {
+                                    print(snapshot.data[0][index][4]);
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => AdminPoll(
                                                 candidates: snapshot.data[0]
                                                     [index][3],
+                                                startTime: snapshot.data[0]
+                                                    [index][4],
+                                                endTime: snapshot.data[0][index]
+                                                    [5],
                                               )),
                                     );
                                   },
