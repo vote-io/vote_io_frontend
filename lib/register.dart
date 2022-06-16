@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:vote_io_frontend/constants.dart';
 import 'package:vote_io_frontend/otp.dart';
 
 class Register extends StatefulWidget {
@@ -32,7 +33,7 @@ class _RegisterState extends State<Register> {
   Future<http.Response> register(
       String email, String username, String phone) async {
     return http.post(
-      Uri.parse('http://localhost:3001/user/signup'),
+      Uri.parse('$serverUrl/user/signup'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -46,6 +47,8 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
+    final navigator = Navigator.of(context);
+
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -60,10 +63,11 @@ class _RegisterState extends State<Register> {
               ),
               Row(
                 children: [
-                  const SizedBox(
-                    width: 20,
-                  ),
+                  Spacer(),
                   Image.asset('assets/logo.png'),
+                  const SizedBox(
+                    width: 15,
+                  ),
                 ],
               ),
               const SizedBox(
@@ -118,7 +122,7 @@ class _RegisterState extends State<Register> {
                         height: 54,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: Color.fromRGBO(43, 43, 43, 1)),
+                            color: const Color.fromRGBO(43, 43, 43, 1)),
                         child: TextFormField(
                           controller: phoneNo,
                           style: const TextStyle(
@@ -148,7 +152,7 @@ class _RegisterState extends State<Register> {
                         height: 54,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: Color.fromRGBO(43, 43, 43, 1)),
+                            color: const Color.fromRGBO(43, 43, 43, 1)),
                         child: TextFormField(
                           controller: name,
                           style: const TextStyle(
@@ -167,7 +171,7 @@ class _RegisterState extends State<Register> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Row(
@@ -229,21 +233,16 @@ class _RegisterState extends State<Register> {
                             Map res = json.decode(response.body);
 
                             print(res);
+
                             if (res.containsKey("_id")) {
-                              Navigator.push(
-                                context,
+                              navigator.push(
                                 MaterialPageRoute(
-                                    builder: (context) => OTP(
-                                          phoneNo: phone,
-                                        )),
+                                  builder: (context) => OTP(
+                                    phoneNo: phone,
+                                  ),
+                                ),
                               );
                             }
-
-                            //sendOtp(context, phoneNo.text);
-
-                            //await writeUser();
-                            // await readUser();
-                            // Navigator.pushReplacementNamed(context, 'otp');
                           },
                         ),
                       ),
@@ -254,74 +253,73 @@ class _RegisterState extends State<Register> {
               const SizedBox(
                 height: 30,
               ),
-              Row(children: [
-                Expanded(
-                  child: Container(
-                      margin: const EdgeInsets.only(left: 10.0, right: 20.0),
-                      child: const Divider(
-                        color: Color.fromRGBO(175, 175, 178, 1),
-                        height: 36,
-                        thickness: 2,
-                      )),
-                ),
-                const Text(
-                  "OR",
-                  style: TextStyle(
-                      color: Color.fromRGBO(255, 255, 255, 1),
-                      //   color: Colors.black12,
-                      fontSize: 14,
-                      fontFamily: 'poppins',
-                      fontWeight: FontWeight.w600),
-                ),
-                Expanded(
-                  child: Container(
-                      margin: const EdgeInsets.only(left: 20.0, right: 10.0),
-                      child: const Divider(
-                        color: Color.fromRGBO(175, 175, 178, 1),
-                        thickness: 2,
-                        height: 36,
-                      )),
-                ),
-              ]),
-              // SizedBox(height: 10,),
-              Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text(
-                          'You can just',
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                        margin: const EdgeInsets.only(left: 10.0, right: 20.0),
+                        child: const Divider(
+                          color: Color.fromRGBO(175, 175, 178, 1),
+                          height: 36,
+                          thickness: 2,
+                        )),
+                  ),
+                  const Text(
+                    "OR",
+                    style: TextStyle(
+                        color: Color.fromRGBO(255, 255, 255, 1),
+                        //   color: Colors.black12,
+                        fontSize: 14,
+                        fontFamily: 'poppins',
+                        fontWeight: FontWeight.w600),
+                  ),
+                  Expanded(
+                    child: Container(
+                        margin: const EdgeInsets.only(left: 20.0, right: 10.0),
+                        child: const Divider(
+                          color: Color.fromRGBO(175, 175, 178, 1),
+                          thickness: 2,
+                          height: 36,
+                        )),
+                  ),
+                ],
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text(
+                        'You can just',
+                        style: TextStyle(
+                            color: Color.fromRGBO(170, 170, 170, 1),
+                            fontSize: 16,
+                            fontFamily: 'poppins',
+                            fontWeight: FontWeight.w600),
+                      )
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(context, 'login');
+                        },
+                        child: const Text(
+                          'Login with existing account',
                           style: TextStyle(
-                              color: Color.fromRGBO(170, 170, 170, 1),
-                              fontSize: 16,
+                              color: Color.fromRGBO(13, 153, 255, 1),
                               fontFamily: 'poppins',
-                              fontWeight: FontWeight.w600),
-                        )
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pushReplacementNamed(context, 'login');
-                          },
-                          child: const Text(
-                            'Login with existing account',
-                            style: TextStyle(
-                                color: Color.fromRGBO(13, 153, 255, 1),
-                                fontFamily: 'poppins',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                                decoration: TextDecoration.underline),
-                          ),
-                        )
-                      ],
-                    )
-                  ],
-                ),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              decoration: TextDecoration.underline),
+                        ),
+                      )
+                    ],
+                  )
+                ],
               ),
             ],
           ),

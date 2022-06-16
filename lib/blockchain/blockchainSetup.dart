@@ -8,7 +8,7 @@ late Client httpClient;
 late Web3Client ethClient;
 // JSON-RPC is a remote procedure call protocol encoded in JSON
 // Remote Procedure Call (RPC) is about executing a block of code on another server
-String rpcUrl = 'HTTP://127.0.0.1:7545';
+String rpcUrl = 'HTTP://10.0.2.2:7545';
 
 Future<void> initialBlockChainSetup() async {
   /// This will start a client that connects to a JSON RPC API, available at RPC URL.
@@ -24,7 +24,7 @@ Future<void> initialBlockChainSetup() async {
 }
 
 String privateKey =
-    'a02a39509ad1eead0bcfb77c7702f736aafd8cdc30b1918911219e0c7b968b43';
+    '3467bc1d48227463b66a97104ac2b2af2f49930d8ce57ab4e0c3ecd2f8a6e6da';
 late Credentials credentials;
 late EthereumAddress myAddress;
 

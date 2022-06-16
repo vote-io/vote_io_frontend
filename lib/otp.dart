@@ -3,13 +3,14 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:vote_io_frontend/constants.dart';
 import 'package:vote_io_frontend/dashboard_1.dart';
 import 'package:vote_io_frontend/regDetails.dart';
 
 class OTP extends StatefulWidget {
-  OTP({Key? key, required this.phoneNo}) : super(key: key);
+  const OTP({Key? key, required this.phoneNo}) : super(key: key);
 
-  String phoneNo;
+  final String phoneNo;
 
   @override
   State<OTP> createState() => _OTPState();
@@ -35,7 +36,7 @@ class _OTPState extends State<OTP> {
 
   Future<http.Response> verify(String phone, String otp) async {
     return http.post(
-      Uri.parse('http://localhost:3001/user/verify'),
+      Uri.parse('$serverUrl/user/verify'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -45,6 +46,7 @@ class _OTPState extends State<OTP> {
 
   @override
   Widget build(BuildContext context) {
+    final navigator = Navigator.of(context);
     return SafeArea(
         child: Scaffold(
       resizeToAvoidBottomInset: false,
@@ -59,68 +61,67 @@ class _OTPState extends State<OTP> {
             ),
             Row(
               children: [
-                SizedBox(
-                  width: 20,
-                ),
+                const Spacer(),
                 Image.asset('assets/logo.png'),
+                const SizedBox(
+                  width: 15,
+                ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 92,
             ),
-            Container(
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
-                        'Enter OTP',
-                        style: TextStyle(
-                          color: Color.fromRGBO(255, 255, 255, 1),
-                          fontSize: 42,
-                          fontFamily: 'poppins',
-                          fontWeight: FontWeight.w600,
-                        ),
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
-                        'A OTP has been sent to your mobile number',
-                        style: TextStyle(
-                          color: Color.fromRGBO(170, 170, 170, 1),
-                          fontSize: 14,
-                          fontFamily: 'poppins',
-                          fontWeight: FontWeight.w600,
-                        ),
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 3,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
-                        'Enter it to continue to the dashboard',
-                        style: TextStyle(
-                          color: Color.fromRGBO(170, 170, 170, 1),
-                          fontSize: 14,
-                          fontFamily: 'poppins',
-                          fontWeight: FontWeight.w600,
-                        ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
+            Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text(
+                      'Enter OTP',
+                      style: TextStyle(
+                        color: Color.fromRGBO(255, 255, 255, 1),
+                        fontSize: 42,
+                        fontFamily: 'poppins',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text(
+                      'A OTP has been sent to your mobile number',
+                      style: TextStyle(
+                        color: Color.fromRGBO(170, 170, 170, 1),
+                        fontSize: 14,
+                        fontFamily: 'poppins',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 3,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text(
+                      'Enter it to continue to the dashboard',
+                      style: TextStyle(
+                        color: Color.fromRGBO(170, 170, 170, 1),
+                        fontSize: 14,
+                        fontFamily: 'poppins',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    )
+                  ],
+                ),
+              ],
             ),
             const SizedBox(
               height: 37,
@@ -144,12 +145,12 @@ class _OTPState extends State<OTP> {
                   blinkWhenObscuring: true,
                   animationType: AnimationType.fade,
                   pinTheme: PinTheme(
-                    activeColor: Color.fromRGBO(52, 52, 52, 1),
+                    activeColor: const Color.fromRGBO(52, 52, 52, 1),
                     inactiveColor: Colors.white70,
                     selectedColor: Colors.white70,
-                    activeFillColor: Color.fromRGBO(52, 52, 52, 1),
-                    selectedFillColor: Color.fromRGBO(52, 52, 52, 1),
-                    inactiveFillColor: Color.fromRGBO(52, 52, 52, 1),
+                    activeFillColor: const Color.fromRGBO(52, 52, 52, 1),
+                    selectedFillColor: const Color.fromRGBO(52, 52, 52, 1),
+                    inactiveFillColor: const Color.fromRGBO(52, 52, 52, 1),
                     shape: PinCodeFieldShape.box,
                     borderRadius: BorderRadius.circular(5),
                     fieldHeight: 50,
@@ -195,7 +196,7 @@ class _OTPState extends State<OTP> {
                   padding: const EdgeInsets.fromLTRB(40.0, 10, 40, 0),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Color.fromRGBO(22, 86, 185, 1)),
+                      color: const Color.fromRGBO(22, 86, 185, 1)),
                   child: TextButton(
                     child: const Text(
                       'CONFIRM',
@@ -215,12 +216,12 @@ class _OTPState extends State<OTP> {
                       print(res);
 
                       if (res["message"] == "OTP correct") {
-                        Navigator.push(
-                          context,
+                        navigator.push(
                           MaterialPageRoute(
-                              builder: (context) => Dashboard1(
-                                    phoneNo: int.parse(phoneNo),
-                                  )),
+                            builder: (context) => Dashboard1(
+                              phoneNo: int.parse(phoneNo),
+                            ),
+                          ),
                         );
                       }
                     },
