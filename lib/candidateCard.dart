@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:vote_io_frontend/blockchain/blockchainSetup.dart';
 
 class CandidateCard extends StatefulWidget {
-  const CandidateCard({Key? key, required this.data, required this.pollId})
+  const CandidateCard(
+      {Key? key,
+      required this.data,
+      required this.pollId,
+      required this.phoneNo})
       : super(key: key);
   final List data;
   final int pollId;
+  final int phoneNo;
   @override
   State<CandidateCard> createState() => _CandidateCardState();
 }
@@ -26,14 +31,14 @@ class _CandidateCardState extends State<CandidateCard> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TextButton(
-                  child: Icon(
+                  child: const Icon(
                     Icons.arrow_back_ios,
                     size: 35,
                   ),
@@ -45,11 +50,11 @@ class _CandidateCardState extends State<CandidateCard> {
                 Image.asset('assets/logo.png'),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Card(
-              color: Color.fromRGBO(20, 20, 20, 1),
+              color: const Color.fromRGBO(20, 20, 20, 1),
               elevation: 10,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15.0),
@@ -60,7 +65,7 @@ class _CandidateCardState extends State<CandidateCard> {
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                      children: const [
                         Text(
                           'Candidate Information',
                           style: TextStyle(
@@ -71,7 +76,7 @@ class _CandidateCardState extends State<CandidateCard> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Container(
@@ -82,7 +87,7 @@ class _CandidateCardState extends State<CandidateCard> {
                           image: DecorationImage(
                               image: NetworkImage('${data[4]}'))),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Row(
@@ -90,7 +95,7 @@ class _CandidateCardState extends State<CandidateCard> {
                       children: [
                         Text(
                           '${data[1]}',
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 24,
                               fontFamily: 'poppins',
                               fontWeight: FontWeight.w700,
@@ -98,7 +103,7 @@ class _CandidateCardState extends State<CandidateCard> {
                         ),
                         Text(
                           '${data[0]}',
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 24,
                               fontFamily: 'poppins',
                               fontWeight: FontWeight.w700,
@@ -106,12 +111,12 @@ class _CandidateCardState extends State<CandidateCard> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
+                      children: const [
                         Text(
                           'Candidate Name',
                           style: TextStyle(
@@ -130,24 +135,22 @@ class _CandidateCardState extends State<CandidateCard> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    Container(
-                      child: Card(
-                        color: Color.fromRGBO(20, 20, 20, 1),
-                        elevation: 10,
-                        child: Text(
-                          '${data[2]}',
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontFamily: 'poppins',
-                              fontWeight: FontWeight.w700,
-                              color: Colors.white),
-                        ),
+                    Card(
+                      color: const Color.fromRGBO(20, 20, 20, 1),
+                      elevation: 10,
+                      child: Text(
+                        '${data[2]}',
+                        style: const TextStyle(
+                            fontSize: 20,
+                            fontFamily: 'poppins',
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                   ],
@@ -161,8 +164,11 @@ class _CandidateCardState extends State<CandidateCard> {
                   width: 300 + 100 - 50,
                   height: 54,
                   padding: const EdgeInsets.fromLTRB(40.0, 10, 40, 0),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: const Color.fromRGBO(22, 86, 185, 1)),
                   child: TextButton(
-                    child: Text(
+                    child: const Text(
                       'Vote',
                       style: TextStyle(
                           color: Color.fromRGBO(255, 255, 255, 1),
@@ -170,15 +176,13 @@ class _CandidateCardState extends State<CandidateCard> {
                           fontFamily: 'poppins',
                           fontWeight: FontWeight.bold),
                     ),
-                    onPressed: () {
-                      dynamic res = castVote(BigInt.from(123),
+                    onPressed: () async {
+                      dynamic res = await castVote(BigInt.from(widget.phoneNo),
                           BigInt.from(widget.pollId), data[0]);
                       print(res);
+                      Navigator.pop(context);
                     },
                   ),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Color.fromRGBO(22, 86, 185, 1)),
                 ),
               ],
             ),

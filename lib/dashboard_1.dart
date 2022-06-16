@@ -19,12 +19,13 @@ class _Dashboard1State extends State<Dashboard1> {
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(45, 45, 46, 1),
+        backgroundColor: const Color.fromRGBO(45, 45, 46, 1),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            const Spacer(),
             TextButton(
-              child: Icon(
+              child: const Icon(
                 Icons.account_circle_rounded,
                 size: 35,
               ),
@@ -40,12 +41,12 @@ class _Dashboard1State extends State<Dashboard1> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
-              children: [
+              children: const [
                 Padding(
                   padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
                   child: Text(
@@ -63,16 +64,16 @@ class _Dashboard1State extends State<Dashboard1> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  margin: EdgeInsets.fromLTRB(20, 10, 0, 10),
+                  margin: const EdgeInsets.fromLTRB(20, 10, 0, 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Color.fromRGBO(27, 27, 27, 1),
+                    color: const Color.fromRGBO(27, 27, 27, 1),
                   ),
-                  padding: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
                   child: Row(
                     children: [
                       TextButton(
-                        child: Text(
+                        child: const Text(
                           'Upcoming ',
                           style: TextStyle(
                               color: Color.fromRGBO(255, 255, 255, 1),
@@ -84,74 +85,72 @@ class _Dashboard1State extends State<Dashboard1> {
                           Navigator.pushReplacementNamed(context, 'dashboard1');
                         },
                       ),
-                      Icon(
+                      const Icon(
                         Icons.arrow_downward_rounded,
                         color: Color.fromRGBO(255, 255, 255, 1),
                       ),
                     ],
                   ),
                 ),
-                Container(
-                  child: Row(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20, 10, 0, 10),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          // color: Color.fromRGBO(27, 27, 27, 1),
-                        ),
-                        padding: EdgeInsets.all(10),
-                        child: Row(
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Color.fromRGBO(27, 27, 27, 1)),
-                              child: TextButton(
-                                child: Text(
-                                  'Created ',
-                                  style: TextStyle(
-                                      color: Color.fromRGBO(255, 255, 255, 1),
-                                      fontSize: 16,
-                                      fontFamily: 'poppins',
-                                      fontWeight: FontWeight.w400),
-                                ),
-                                onPressed: () {
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Dashboard1(
-                                              phoneNo: widget.phoneNo)));
-                                },
-                              ),
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Color.fromRGBO(80, 80, 80, 1)),
-                              child: TextButton(
-                                child: Text(
-                                  'Joined ',
-                                  style: TextStyle(
-                                      color: Color.fromRGBO(255, 255, 255, 1),
-                                      fontSize: 16,
-                                      fontFamily: 'poppins',
-                                      fontWeight: FontWeight.w400),
-                                ),
-                                onPressed: () {
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Dashboard2(
-                                              phoneNo: widget.phoneNo)));
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
+                Row(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 10, 0, 10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        // color: Color.fromRGBO(27, 27, 27, 1),
                       ),
-                    ],
-                  ),
+                      padding: const EdgeInsets.all(10),
+                      child: Row(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: const Color.fromRGBO(27, 27, 27, 1)),
+                            child: TextButton(
+                              child: const Text(
+                                'Created ',
+                                style: TextStyle(
+                                    color: Color.fromRGBO(255, 255, 255, 1),
+                                    fontSize: 16,
+                                    fontFamily: 'poppins',
+                                    fontWeight: FontWeight.w400),
+                              ),
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Dashboard1(
+                                            phoneNo: widget.phoneNo)));
+                              },
+                            ),
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: const Color.fromRGBO(80, 80, 80, 1)),
+                            child: TextButton(
+                              child: const Text(
+                                'Joined ',
+                                style: TextStyle(
+                                    color: Color.fromRGBO(255, 255, 255, 1),
+                                    fontSize: 16,
+                                    fontFamily: 'poppins',
+                                    fontWeight: FontWeight.w400),
+                              ),
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Dashboard2(
+                                            phoneNo: widget.phoneNo)));
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -160,79 +159,86 @@ class _Dashboard1State extends State<Dashboard1> {
                   future: getCreatedPolls(BigInt.from(widget.phoneNo)),
                   builder: (context, AsyncSnapshot snapshot) {
                     if (!snapshot.hasData) {
-                      return Center(child: CircularProgressIndicator());
+                      return const Center(child: CircularProgressIndicator());
                     } else {
-                      return Container(
-                        child: ListView.builder(
-                            itemCount: snapshot.data[0].length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(0, 10, 10, 10),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    print(snapshot.data[0][index][4]);
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => AdminPoll(
-                                                candidates: snapshot.data[0]
-                                                    [index][3],
-                                                startTime: snapshot.data[0]
-                                                    [index][4],
-                                                endTime: snapshot.data[0][index]
-                                                    [5],
-                                              )),
-                                    );
-                                  },
-                                  child: Container(
-                                    margin: EdgeInsets.fromLTRB(10, 20, 10, 0),
-                                    width: 300 + 100 - 50,
-                                    height: 54,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: Color.fromRGBO(43, 43, 43, 1)),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Text(
-                                          '${snapshot.data[0][index][1]}',
-                                          style: TextStyle(
-                                            color: Color.fromRGBO(
-                                                170, 170, 170, 1),
-                                            fontWeight: FontWeight.w600,
-                                            fontFamily: 'poppins',
-                                            fontSize: 18,
-                                          ),
+                      return ListView.builder(
+                          itemCount: snapshot.data[0].length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
+                              child: GestureDetector(
+                                onTap: () {
+                                  print(snapshot.data[0][index][4]);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => AdminPoll(
+                                              candidates: snapshot.data[0]
+                                                  [index][3],
+                                              startTime: snapshot.data[0][index]
+                                                  [4],
+                                              endTime: snapshot.data[0][index]
+                                                  [5],
+                                            )),
+                                  );
+                                },
+                                child: Container(
+                                  margin:
+                                      const EdgeInsets.fromLTRB(10, 20, 10, 0),
+                                  width: 300 + 100 - 50,
+                                  height: 54,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color:
+                                          const Color.fromRGBO(43, 43, 43, 1)),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Text(
+                                        '${snapshot.data[0][index][1]}',
+                                        style: const TextStyle(
+                                          color:
+                                              Color.fromRGBO(170, 170, 170, 1),
+                                          fontWeight: FontWeight.w600,
+                                          fontFamily: 'poppins',
+                                          fontSize: 18,
                                         ),
-                                        Text(
-                                          '${DateTime.fromMillisecondsSinceEpoch(snapshot.data[0][index][4].toInt()).toString().substring(0, 10)}',
-                                          style: TextStyle(
-                                            color: Color.fromRGBO(
-                                                170, 170, 170, 1),
-                                            fontWeight: FontWeight.w600,
-                                            fontFamily: 'poppins',
-                                            fontSize: 18,
-                                          ),
+                                      ),
+                                      Text(
+                                        DateTime.fromMillisecondsSinceEpoch(
+                                                snapshot.data[0][index][4]
+                                                    .toInt())
+                                            .toString()
+                                            .substring(0, 10),
+                                        style: const TextStyle(
+                                          color:
+                                              Color.fromRGBO(170, 170, 170, 1),
+                                          fontWeight: FontWeight.w600,
+                                          fontFamily: 'poppins',
+                                          fontSize: 18,
                                         ),
-                                        Text(
-                                          '${DateTime.fromMillisecondsSinceEpoch(snapshot.data[0][index][5].toInt()).toString().substring(0, 10)}',
-                                          style: TextStyle(
-                                            color: Color.fromRGBO(
-                                                170, 170, 170, 1),
-                                            fontWeight: FontWeight.w600,
-                                            fontFamily: 'poppins',
-                                            fontSize: 18,
-                                          ),
+                                      ),
+                                      Text(
+                                        DateTime.fromMillisecondsSinceEpoch(
+                                                snapshot.data[0][index][5]
+                                                    .toInt())
+                                            .toString()
+                                            .substring(0, 10),
+                                        style: const TextStyle(
+                                          color:
+                                              Color.fromRGBO(170, 170, 170, 1),
+                                          fontWeight: FontWeight.w600,
+                                          fontFamily: 'poppins',
+                                          fontSize: 18,
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              );
-                            }),
-                      );
+                              ),
+                            );
+                          });
                     }
                   }),
             ),
@@ -243,8 +249,11 @@ class _Dashboard1State extends State<Dashboard1> {
                   width: 300 + 100 - 50,
                   height: 54,
                   padding: const EdgeInsets.fromLTRB(40, 10, 40, 0),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: const Color.fromRGBO(22, 86, 185, 1)),
                   child: TextButton(
-                    child: Text(
+                    child: const Text(
                       'Create a new Poll',
                       style: TextStyle(
                           color: Color.fromRGBO(255, 255, 255, 1),
@@ -252,18 +261,18 @@ class _Dashboard1State extends State<Dashboard1> {
                           fontFamily: 'poppins',
                           fontWeight: FontWeight.bold),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
+                      // var a = await getUserDetails(BigInt.from(widget.phoneNo));
                       Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => CreatePoll(
-                                    phoneNo: widget.phoneNo,
-                                  )));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CreatePoll(
+                            phoneNo: widget.phoneNo,
+                          ),
+                        ),
+                      );
                     },
                   ),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Color.fromRGBO(22, 86, 185, 1)),
                 ),
               ],
             ),

@@ -150,6 +150,9 @@ class _JoinPollState extends State<JoinPoll> {
                         width: 300 + 100 - 50,
                         height: 54,
                         padding: const EdgeInsets.fromLTRB(40.0, 10, 40, 0),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Color.fromRGBO(22, 86, 185, 1)),
                         child: TextButton(
                           child: Text(
                             'Submit',
@@ -159,12 +162,12 @@ class _JoinPollState extends State<JoinPoll> {
                                 fontFamily: 'poppins',
                                 fontWeight: FontWeight.bold),
                           ),
-                          onPressed: () {
+                          onPressed: () async {
                             BigInt pollId =
                                 BigInt.from(int.parse(idController.text));
 
                             dynamic res =
-                                joinPoll(BigInt.from(widget.phoneNo), pollId);
+                                await joinPoll(BigInt.from(widget.phoneNo), pollId);
                             print(res);
 
                             Navigator.pushReplacement(
@@ -174,9 +177,6 @@ class _JoinPollState extends State<JoinPoll> {
                                         Dashboard2(phoneNo: widget.phoneNo)));
                           },
                         ),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Color.fromRGBO(22, 86, 185, 1)),
                       ),
                     ],
                   ),

@@ -145,7 +145,10 @@ class _LoginState extends State<Login> {
                             navigator.pushReplacement(
                               MaterialPageRoute(
                                 builder: (context) => OTP(
+                                  registering: false,
                                   phoneNo: phone,
+                                  name: '',
+                                  email: '',
                                 ),
                               ),
                             );

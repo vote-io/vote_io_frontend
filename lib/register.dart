@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:vote_io_frontend/blockchain/blockchainSetup.dart';
 import 'package:vote_io_frontend/constants.dart';
 import 'package:vote_io_frontend/otp.dart';
 
@@ -231,14 +232,18 @@ class _RegisterState extends State<Register> {
                             http.Response response =
                                 await register(email, username, '+91${phone}');
                             Map res = json.decode(response.body);
-
+                            print("Successfully registered");
                             print(res);
+
 
                             if (res.containsKey("_id")) {
                               navigator.push(
                                 MaterialPageRoute(
                                   builder: (context) => OTP(
+                                    registering: true,
                                     phoneNo: phone,
+                                    name: username,
+                                    email: email,
                                   ),
                                 ),
                               );
@@ -327,17 +332,4 @@ class _RegisterState extends State<Register> {
       ),
     );
   }
-}
-
-sendOtp(context, phoneNo) {
-  //todo: send otp and verify
-
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => OTP(
-        phoneNo: phoneNo,
-      ),
-    ),
-  );
 }

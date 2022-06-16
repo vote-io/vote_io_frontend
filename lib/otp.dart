@@ -7,10 +7,21 @@ import 'package:vote_io_frontend/constants.dart';
 import 'package:vote_io_frontend/dashboard_1.dart';
 import 'package:vote_io_frontend/regDetails.dart';
 
-class OTP extends StatefulWidget {
-  const OTP({Key? key, required this.phoneNo}) : super(key: key);
+import 'blockchain/blockchainSetup.dart';
 
+class OTP extends StatefulWidget {
+  const OTP(
+      {Key? key,
+      required this.registering,
+      required this.phoneNo,
+      required this.name,
+      required this.email})
+      : super(key: key);
+
+  final bool registering;
   final String phoneNo;
+  final String name;
+  final String email;
 
   @override
   State<OTP> createState() => _OTPState();
@@ -216,6 +227,10 @@ class _OTPState extends State<OTP> {
                       print(res);
 
                       if (res["message"] == "OTP correct") {
+                        if (widget.registering) {
+                          await addNewUser(BigInt.parse(phoneNo),
+                              widget.name, widget.email);
+                        }
                         navigator.push(
                           MaterialPageRoute(
                             builder: (context) => Dashboard1(
