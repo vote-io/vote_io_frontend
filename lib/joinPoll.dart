@@ -17,40 +17,44 @@ class _JoinPollState extends State<JoinPoll> {
 
   @override
   Widget build(BuildContext context) {
+    final navigator = Navigator.of(context);
     return SafeArea(
-        child: Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Container(
-        color: Colors.black87,
-        width: double.infinity,
-        height: double.infinity,
-        child: Column(
-          //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            SizedBox(height: 30),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Image.asset('assets/logo.png'),
-                Text(
-                  'VoteHub',
-                  style: TextStyle(
-                      fontSize: 24,
-                      fontFamily: 'poppins',
-                      fontWeight: FontWeight.w600,
-                      color: Color.fromRGBO(73, 132, 224, 1)),
-                )
-              ],
-            ),
-            SizedBox(
-              height: 25,
-            ),
-            Container(
-              child: Column(
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: Container(
+          color: Colors.black87,
+          width: double.infinity,
+          height: double.infinity,
+          child: Column(
+            //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              const SizedBox(
+                height: 15,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextButton(
+                    child: const Icon(
+                      Icons.arrow_back_ios,
+                      size: 35,
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  const Spacer(),
+                  Image.asset('assets/logo.png'),
+                ],
+              ),
+              const SizedBox(
+                height: 25,
+              ),
+              Column(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+                    children: const [
                       Text(
                         'Join Poll',
                         style: TextStyle(
@@ -64,7 +68,7 @@ class _JoinPollState extends State<JoinPoll> {
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+                    children: const [
                       Text(
                         'Enter the Poll ID and Unique Key to join Poll',
                         style: TextStyle(
@@ -78,13 +82,10 @@ class _JoinPollState extends State<JoinPoll> {
                   ),
                 ],
               ),
-            ),
-
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              child: Column(
+              const SizedBox(
+                height: 20,
+              ),
+              Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
@@ -94,9 +95,12 @@ class _JoinPollState extends State<JoinPoll> {
                         width: 300 + 100 - 50,
                         height: 54,
                         padding: const EdgeInsets.fromLTRB(40.0, 10, 40, 0),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: const Color.fromRGBO(43, 43, 43, 1)),
                         child: TextFormField(
                           controller: idController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintText: 'Poll ID',
                             hintStyle: TextStyle(
                                 color: Color.fromRGBO(170, 170, 170, 1)),
@@ -106,13 +110,10 @@ class _JoinPollState extends State<JoinPoll> {
                             enabledBorder: InputBorder.none,
                           ),
                         ),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Color.fromRGBO(43, 43, 43, 1)),
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   // Row(
@@ -152,9 +153,9 @@ class _JoinPollState extends State<JoinPoll> {
                         padding: const EdgeInsets.fromLTRB(40.0, 10, 40, 0),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: Color.fromRGBO(22, 86, 185, 1)),
+                            color: const Color.fromRGBO(22, 86, 185, 1)),
                         child: TextButton(
-                          child: Text(
+                          child: const Text(
                             'Submit',
                             style: TextStyle(
                                 color: Color.fromRGBO(255, 255, 255, 1),
@@ -166,15 +167,9 @@ class _JoinPollState extends State<JoinPoll> {
                             BigInt pollId =
                                 BigInt.from(int.parse(idController.text));
 
-                            dynamic res =
-                                await joinPoll(BigInt.from(widget.phoneNo), pollId);
-                            print(res);
+                            await joinPoll(BigInt.from(widget.phoneNo), pollId);
 
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        Dashboard2(phoneNo: widget.phoneNo)));
+                            navigator.pop();
                           },
                         ),
                       ),
@@ -182,15 +177,10 @@ class _JoinPollState extends State<JoinPoll> {
                   ),
                 ],
               ),
-            ),
-            // SizedBox(height: 20,),
-
-            // SizedBox(height: 20,),
-
-            // SizedBox(height: 10,),
-          ],
+            ],
+          ),
         ),
       ),
-    ));
+    );
   }
 }

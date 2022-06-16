@@ -3,8 +3,8 @@ import 'package:vote_io_frontend/pollStep2.dart';
 
 class CreatePoll extends StatefulWidget {
   const CreatePoll({Key? key, required this.phoneNo}) : super(key: key);
-
   final int phoneNo;
+
   @override
   State<CreatePoll> createState() => _CreatePollState();
 }
@@ -13,12 +13,10 @@ class _CreatePollState extends State<CreatePoll> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      //backgroundColor: Color.fromRGBO(33, 33, 33, 1),
-
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.black87,
           ),
           width: double.infinity,
@@ -32,7 +30,7 @@ class _CreatePollState extends State<CreatePoll> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     TextButton(
-                      child: Icon(
+                      child: const Icon(
                         Icons.arrow_back_ios,
                         size: 35,
                       ),
@@ -40,16 +38,16 @@ class _CreatePollState extends State<CreatePoll> {
                         Navigator.pop(context);
                       },
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Image.asset('assets/logo.png'),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+                  children: const [
                     Text(
                       'Create Poll',
                       style: TextStyle(
@@ -61,12 +59,12 @@ class _CreatePollState extends State<CreatePoll> {
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+                  children: const [
                     Text(
                       'Create a new Poll',
                       style: TextStyle(
@@ -78,7 +76,7 @@ class _CreatePollState extends State<CreatePoll> {
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 Expanded(
@@ -125,10 +123,11 @@ class _create_poll_formState extends State<create_poll_form> {
           initialDate: selectedStartDate,
           firstDate: DateTime(2022),
           lastDate: DateTime(2025));
-      if (picked != null && picked != selectedStartDate)
+      if (picked != null && picked != selectedStartDate) {
         setState(() {
           selectedStartDate = picked;
         });
+      }
     }
 
     Future<void> _selectEndDate(BuildContext context) async {
@@ -137,10 +136,13 @@ class _create_poll_formState extends State<create_poll_form> {
           initialDate: selectedEndDate,
           firstDate: DateTime(2022),
           lastDate: DateTime(2025));
-      if (picked != null && picked != selectedEndDate)
-        setState(() {
-          selectedEndDate = picked;
-        });
+      if (picked != null && picked != selectedEndDate) {
+        setState(
+          () {
+            selectedEndDate = picked;
+          },
+        );
+      }
     }
 
     return Form(
@@ -148,10 +150,10 @@ class _create_poll_formState extends State<create_poll_form> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Text(
+          const Text(
             'Enter name of the poll',
             style: TextStyle(
               fontFamily: 'poppins',
@@ -160,19 +162,22 @@ class _create_poll_formState extends State<create_poll_form> {
               fontSize: 18,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10 / 2,
           ),
           Container(
             width: 300 + 100 - 50,
             height: 54,
             padding: const EdgeInsets.fromLTRB(40.0, 10, 40, 0),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Color.fromRGBO(43, 43, 43, 1)),
             child: TextFormField(
               style: const TextStyle(
                 color: Color(0xffAAAAAA),
               ),
               controller: nameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Name of Poll',
                 hintStyle: TextStyle(color: Color.fromRGBO(170, 170, 170, 1)),
                 border: OutlineInputBorder(),
@@ -181,14 +186,11 @@ class _create_poll_formState extends State<create_poll_form> {
                 enabledBorder: InputBorder.none,
               ),
             ),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Color.fromRGBO(43, 43, 43, 1)),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
-          Text(
+          const Text(
             'Enter poll description',
             style: TextStyle(
               fontFamily: 'poppins',
@@ -197,7 +199,7 @@ class _create_poll_formState extends State<create_poll_form> {
               fontSize: 18,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10 / 2,
           ),
           Row(
@@ -207,12 +209,15 @@ class _create_poll_formState extends State<create_poll_form> {
                 width: 300 + 100 - 50,
                 height: 54,
                 padding: const EdgeInsets.fromLTRB(40.0, 10, 40, 0),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Color.fromRGBO(43, 43, 43, 1)),
                 child: TextFormField(
                   style: const TextStyle(
                     color: Color(0xffAAAAAA),
                   ),
                   controller: descController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'Poll Description',
                     hintStyle:
                         TextStyle(color: Color.fromRGBO(170, 170, 170, 1)),
@@ -222,16 +227,13 @@ class _create_poll_formState extends State<create_poll_form> {
                     enabledBorder: InputBorder.none,
                   ),
                 ),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Color.fromRGBO(43, 43, 43, 1)),
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
-          Text(
+          const Text(
             'Enter start date',
             style: TextStyle(
               fontFamily: 'poppins',
@@ -243,16 +245,16 @@ class _create_poll_formState extends State<create_poll_form> {
           Container(
             width: 350,
             height: 54,
-            padding: EdgeInsets.fromLTRB(40, 10, 40, 0),
+            padding: const EdgeInsets.fromLTRB(40, 10, 40, 0),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Color.fromRGBO(43, 43, 43, 1)),
+                color: const Color.fromRGBO(43, 43, 43, 1)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   "${selectedStartDate.toLocal()}".split(' ')[0],
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontFamily: 'poppins',
                     fontWeight: FontWeight.w600,
                     color: Color.fromRGBO(198, 198, 198, 1),
@@ -260,23 +262,23 @@ class _create_poll_formState extends State<create_poll_form> {
                   ),
                 ),
                 RaisedButton(
-                  onPressed: () => _selectStartDate(context), // Refer step 3
-                  child: Text(
+                  onPressed: () => _selectStartDate(context),
+                  color: const Color.fromRGBO(33, 33, 33, 1),
+                  elevation: 0, // Refer step 3
+                  child: const Text(
                     'Select date',
                     style: TextStyle(
                         color: Color.fromRGBO(198, 198, 198, 1),
                         fontWeight: FontWeight.bold),
                   ),
-                  color: Color.fromRGBO(33, 33, 33, 1),
-                  elevation: 0,
                 ),
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20.0,
           ),
-          Text(
+          const Text(
             'Enter Finish date',
             style: TextStyle(
               fontFamily: 'poppins',
@@ -288,16 +290,16 @@ class _create_poll_formState extends State<create_poll_form> {
           Container(
             width: 350,
             height: 54,
-            padding: EdgeInsets.fromLTRB(40, 10, 40, 0),
+            padding: const EdgeInsets.fromLTRB(40, 10, 40, 0),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Color.fromRGBO(43, 43, 43, 1)),
+                color: const Color.fromRGBO(43, 43, 43, 1)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   "${selectedEndDate.toLocal()}".split(' ')[0],
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontFamily: 'poppins',
                     fontWeight: FontWeight.w600,
                     color: Color.fromRGBO(198, 198, 198, 1),
@@ -305,20 +307,20 @@ class _create_poll_formState extends State<create_poll_form> {
                   ),
                 ),
                 RaisedButton(
-                  onPressed: () => _selectEndDate(context), // Refer step 3
-                  child: Text(
+                  onPressed: () => _selectEndDate(context),
+                  color: const Color.fromRGBO(33, 33, 33, 1),
+                  elevation: 0, // Refer step 3
+                  child: const Text(
                     'Select date',
                     style: TextStyle(
                         color: Color.fromRGBO(198, 198, 198, 1),
                         fontWeight: FontWeight.bold),
                   ),
-                  color: Color.fromRGBO(33, 33, 33, 1),
-                  elevation: 0,
                 ),
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Row(
@@ -328,8 +330,11 @@ class _create_poll_formState extends State<create_poll_form> {
                 width: 300 + 100 - 50,
                 height: 54,
                 padding: const EdgeInsets.fromLTRB(40.0, 10, 40, 0),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: const Color.fromRGBO(22, 86, 185, 1)),
                 child: TextButton(
-                  child: Text(
+                  child: const Text(
                     'Next',
                     style: TextStyle(
                         color: Color.fromRGBO(255, 255, 255, 1),
@@ -344,22 +349,19 @@ class _create_poll_formState extends State<create_poll_form> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => pollStep2(
-                              pollName: name,
-                              desc: desc,
-                              startDate: selectedStartDate
-                                  .toUtc()
-                                  .millisecondsSinceEpoch,
-                              endDate: selectedEndDate
-                                  .toUtc()
-                                  .millisecondsSinceEpoch,
-                              phoneNo: widget.phoneNo)),
+                        builder: (context) => pollStep2(
+                            pollName: name,
+                            desc: desc,
+                            startDate: selectedStartDate
+                                .toUtc()
+                                .millisecondsSinceEpoch,
+                            endDate:
+                                selectedEndDate.toUtc().millisecondsSinceEpoch,
+                            phoneNo: widget.phoneNo),
+                      ),
                     );
                   },
                 ),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Color.fromRGBO(22, 86, 185, 1)),
               ),
             ],
           ),

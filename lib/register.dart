@@ -237,7 +237,7 @@ class _RegisterState extends State<Register> {
 
 
                             if (res.containsKey("_id")) {
-                              navigator.push(
+                              navigator.pushReplacement(
                                 MaterialPageRoute(
                                   builder: (context) => OTP(
                                     registering: true,

@@ -19,12 +19,10 @@ class _AddCandidateState extends State<AddCandidate> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      //backgroundColor: Color.fromRGBO(33, 33, 33, 1),
-
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.black87,
           ),
           width: double.infinity,
@@ -38,7 +36,7 @@ class _AddCandidateState extends State<AddCandidate> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Image.asset('assets/logo.png'),
-                    Text(
+                    const Text(
                       'VoteHub',
                       style: TextStyle(
                           fontSize: 24,
@@ -48,12 +46,12 @@ class _AddCandidateState extends State<AddCandidate> {
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+                  children: const [
                     Text(
                       'Add a Candidate',
                       style: TextStyle(
@@ -65,12 +63,12 @@ class _AddCandidateState extends State<AddCandidate> {
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+                  children: const [
                     Text(
                       'Add details of the new Candidate here',
                       style: TextStyle(
@@ -82,7 +80,7 @@ class _AddCandidateState extends State<AddCandidate> {
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 Expanded(
@@ -157,15 +155,15 @@ class _AddCandidate_FormState extends State<AddCandidate_Form> {
               width: 100,
               height: 100,
               child: Stack(children: <Widget>[
-                new Container(
+                Container(
                   alignment: Alignment.center,
                   height: 100,
                   width: 100,
                   decoration: BoxDecoration(
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                         color: Color.fromRGBO(35, 35, 35, 0.4),
-                        offset: const Offset(
+                        offset: Offset(
                           0,
                           4,
                         ),
@@ -202,22 +200,22 @@ class _AddCandidate_FormState extends State<AddCandidate_Form> {
                         });
                       }
                     },
-                    child: Icon(Icons.add, color: Colors.white),
                     style: ElevatedButton.styleFrom(
                         minimumSize: Size.zero, // Set this
-                        padding: EdgeInsets.all(8), // and this
-                        shape: CircleBorder(),
-                        primary: Color.fromRGBO(22, 22, 22, 1),
+                        padding: const EdgeInsets.all(8), // and this
+                        shape: const CircleBorder(),
+                        primary: const Color.fromRGBO(22, 22, 22, 1),
                         elevation: 4),
+                    child: const Icon(Icons.add, color: Colors.white),
                   ),
                 )
               ]),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Text(
+          const Text(
             'Enter name of the candidate',
             style: TextStyle(
               fontFamily: 'poppins',
@@ -226,16 +224,19 @@ class _AddCandidate_FormState extends State<AddCandidate_Form> {
               fontSize: 18,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10 / 2,
           ),
           Container(
             width: 300 + 100 - 50,
             height: 54,
             padding: const EdgeInsets.fromLTRB(40.0, 10, 40, 0),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: const Color.fromRGBO(43, 43, 43, 1)),
             child: TextFormField(
               controller: nameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Name of Candidate',
                 hintStyle: TextStyle(color: Color.fromRGBO(170, 170, 170, 1)),
                 border: OutlineInputBorder(),
@@ -244,14 +245,11 @@ class _AddCandidate_FormState extends State<AddCandidate_Form> {
                 enabledBorder: InputBorder.none,
               ),
             ),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Color.fromRGBO(43, 43, 43, 1)),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
-          Text(
+          const Text(
             'Enter description of the candidate',
             style: TextStyle(
               fontFamily: 'poppins',
@@ -260,7 +258,7 @@ class _AddCandidate_FormState extends State<AddCandidate_Form> {
               fontSize: 18,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10 / 2,
           ),
           Row(
@@ -270,9 +268,12 @@ class _AddCandidate_FormState extends State<AddCandidate_Form> {
                 width: 300 + 100 - 50,
                 height: 54,
                 padding: const EdgeInsets.fromLTRB(40.0, 10, 40, 0),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: const Color.fromRGBO(43, 43, 43, 1)),
                 child: TextFormField(
                   controller: descController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'Poll Description',
                     hintStyle:
                         TextStyle(color: Color.fromRGBO(170, 170, 170, 1)),
@@ -282,13 +283,10 @@ class _AddCandidate_FormState extends State<AddCandidate_Form> {
                     enabledBorder: InputBorder.none,
                   ),
                 ),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Color.fromRGBO(43, 43, 43, 1)),
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Row(
@@ -298,8 +296,11 @@ class _AddCandidate_FormState extends State<AddCandidate_Form> {
                 width: 300 + 100 - 50,
                 height: 54,
                 padding: const EdgeInsets.fromLTRB(40.0, 10, 40, 0),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: const Color.fromRGBO(22, 86, 185, 1)),
                 child: TextButton(
-                  child: Text(
+                  child: const Text(
                     'Add Candidate',
                     style: TextStyle(
                         color: Color.fromRGBO(255, 255, 255, 1),
@@ -323,9 +324,6 @@ class _AddCandidate_FormState extends State<AddCandidate_Form> {
                     Navigator.pop(context);
                   },
                 ),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Color.fromRGBO(22, 86, 185, 1)),
               ),
             ],
           ),

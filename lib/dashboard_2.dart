@@ -21,16 +21,11 @@ class _Dashboard2State extends State<Dashboard2> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: const Color.fromRGBO(45, 45, 46, 1),
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                'VoteHub',
-                style: TextStyle(
-                  color: Color.fromRGBO(73, 132, 224, 1),
-                ),
-              ),
               TextButton(
                 child: const Icon(
                   Icons.account_circle_rounded,
@@ -40,6 +35,8 @@ class _Dashboard2State extends State<Dashboard2> {
                   Navigator.pushNamed(context, 'accountInfo');
                 },
               ),
+              const Spacer(),
+              Image.asset('assets/logo.png'),
             ],
           ),
         ),
@@ -125,10 +122,19 @@ class _Dashboard2State extends State<Dashboard2> {
                                 ),
                                 onPressed: () {
                                   Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Dashboard1(
-                                              phoneNo: widget.phoneNo)));
+                                    context,
+                                    MaterialPageRoute(
+                                      settings: const RouteSettings(
+                                          name: "/dashboard1"),
+                                      builder: (context) =>
+                                          Dashboard1(phoneNo: widget.phoneNo),
+                                    ),
+                                  );
+                                  // Navigator.pushReplacement(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //         builder: (context) => Dashboard1(
+                                  //             phoneNo: widget.phoneNo)));
                                 },
                               ),
                             ),
@@ -147,10 +153,19 @@ class _Dashboard2State extends State<Dashboard2> {
                                 ),
                                 onPressed: () {
                                   Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Dashboard2(
-                                              phoneNo: widget.phoneNo)));
+                                    context,
+                                    MaterialPageRoute(
+                                      settings: const RouteSettings(
+                                          name: "/dashboard2"),
+                                      builder: (context) =>
+                                          Dashboard2(phoneNo: widget.phoneNo),
+                                    ),
+                                  );
+                                  // Navigator.pushReplacement(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //         builder: (context) => Dashboard2(
+                                  //             phoneNo: widget.phoneNo)));
                                 },
                               ),
                             ),
@@ -176,7 +191,7 @@ class _Dashboard2State extends State<Dashboard2> {
                           return Padding(
                             padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
                             child: GestureDetector(
-                              onTap: () {
+                              onTap: () async {
                                 print(snapshot.data[0][index]);
                                 if (DateTime.now()
                                             .toUtc()
@@ -187,9 +202,11 @@ class _Dashboard2State extends State<Dashboard2> {
                                             .millisecondsSinceEpoch <
                                         snapshot.data[0][index][0][5].toInt()) {
                                   if (snapshot.data[0][index][1] == false) {
-                                    Navigator.push(
+                                    await Navigator.push(
                                       context,
                                       MaterialPageRoute(
+                                        settings: const RouteSettings(
+                                            name: "/candidatesList"),
                                         builder: (context) => VotePage(
                                           candidates: snapshot.data[0][index][0]
                                               [3],
@@ -203,6 +220,23 @@ class _Dashboard2State extends State<Dashboard2> {
                                         ),
                                       ),
                                     );
+                                    setState(() {});
+                                    // Navigator.push(
+                                    //   context,
+                                    //   MaterialPageRoute(
+                                    //     builder: (context) => VotePage(
+                                    //       candidates: snapshot.data[0][index][0]
+                                    //           [3],
+                                    //       pollId: snapshot.data[0][index][0][0]
+                                    //           .toInt(),
+                                    //       votingRange: [
+                                    //         snapshot.data[0][index][0][4],
+                                    //         snapshot.data[0][index][0][5]
+                                    //       ],
+                                    //       phoneNo: widget.phoneNo,
+                                    //     ),
+                                    //   ),
+                                    // );
                                   } else {
                                     const snackBar = SnackBar(
                                       content: Text('Already voted'),
@@ -239,10 +273,11 @@ class _Dashboard2State extends State<Dashboard2> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => Results(
-                                              candidateName: winnerName,
-                                              candidateId: winnerId,
-                                            )),
+                                      builder: (context) => Results(
+                                        candidateName: winnerName,
+                                        candidateId: winnerId,
+                                      ),
+                                    ),
                                   );
                                 }
                               },
@@ -258,6 +293,15 @@ class _Dashboard2State extends State<Dashboard2> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
+                                    Text(
+                                      '${snapshot.data[0][index][0][0].toInt() + 1}',
+                                      style: const TextStyle(
+                                        color: Color.fromRGBO(170, 170, 170, 1),
+                                        fontWeight: FontWeight.w600,
+                                        fontFamily: 'poppins',
+                                        fontSize: 18,
+                                      ),
+                                    ),
                                     Text(
                                       '${snapshot.data[0][index][0][1]}',
                                       style: const TextStyle(
@@ -322,13 +366,15 @@ class _Dashboard2State extends State<Dashboard2> {
                             fontWeight: FontWeight.bold),
                       ),
                       onPressed: () {
-                        Navigator.pushReplacement(
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
                                 JoinPoll(phoneNo: widget.phoneNo),
                           ),
                         );
+
+                        setState(() {});
                       },
                     ),
                   ),

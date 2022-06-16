@@ -30,21 +30,22 @@ class _pollStep2State extends State<pollStep2> {
 
   @override
   Widget build(BuildContext context) {
+    final navigator = Navigator.of(context);
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(45, 45, 46, 1),
+        backgroundColor: const Color.fromRGBO(45, 45, 46, 1),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
+            const Text(
               'VoteHub',
               style: TextStyle(
                 color: Color.fromRGBO(73, 132, 224, 1),
               ),
             ),
             TextButton(
-              child: Icon(
+              child: const Icon(
                 Icons.account_circle_rounded,
                 size: 35,
               ),
@@ -64,7 +65,7 @@ class _pollStep2State extends State<pollStep2> {
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: [
+                children: const [
                   Padding(
                     padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
                     child: Text(
@@ -87,7 +88,7 @@ class _pollStep2State extends State<pollStep2> {
                     return Padding(
                       padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
                       child: Card(
-                        color: Color.fromRGBO(38, 38, 38, 1),
+                        color: const Color.fromRGBO(38, 38, 38, 1),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0),
                         ),
@@ -118,7 +119,7 @@ class _pollStep2State extends State<pollStep2> {
                                                   image: NetworkImage(
                                                       '${candidate[index][4]}'))),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 20,
                                         ),
                                       ],
@@ -131,7 +132,7 @@ class _pollStep2State extends State<pollStep2> {
                                       children: [
                                         Text(
                                           '${candidate[index][1]}',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontFamily: 'montserrat',
                                               fontWeight: FontWeight.w700,
                                               fontSize: 20,
@@ -139,7 +140,7 @@ class _pollStep2State extends State<pollStep2> {
                                                   251, 251, 251, 1)),
                                         ),
 
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 20,
                                         ),
 
@@ -152,7 +153,7 @@ class _pollStep2State extends State<pollStep2> {
                                       children: [
                                         Text(
                                           '${candidate[index][0].toInt() + 1}',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontFamily: 'montserrat',
                                               fontWeight: FontWeight.w700,
                                               fontSize: 18,
@@ -180,8 +181,11 @@ class _pollStep2State extends State<pollStep2> {
                     width: 350,
                     height: 54,
                     padding: const EdgeInsets.fromLTRB(40.0, 10, 40, 0),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: const Color.fromRGBO(22, 86, 185, 1)),
                     child: TextButton(
-                      child: Text(
+                      child: const Text(
                         'Add a new candidate',
                         style: TextStyle(
                             color: Color.fromRGBO(255, 255, 255, 1),
@@ -208,13 +212,10 @@ class _pollStep2State extends State<pollStep2> {
                         });
                       },
                     ),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Color.fromRGBO(22, 86, 185, 1)),
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Row(
@@ -224,8 +225,11 @@ class _pollStep2State extends State<pollStep2> {
                     width: 350,
                     height: 54,
                     padding: const EdgeInsets.fromLTRB(40.0, 10, 40, 0),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: const Color.fromRGBO(22, 86, 185, 1)),
                     child: TextButton(
-                      child: Text(
+                      child: const Text(
                         'Publish poll',
                         style: TextStyle(
                             color: Color.fromRGBO(255, 255, 255, 1),
@@ -236,26 +240,23 @@ class _pollStep2State extends State<pollStep2> {
                       onPressed: () async {
                         dynamic reply = await createPoll(
                             widget.pollName,
-                            BigInt.from(12345),
+                            BigInt.from(widget.phoneNo),
                             candidate,
                             BigInt.from(widget.startDate),
                             BigInt.from(widget.endDate));
                         print(reply);
 
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DialogBox(
-                                phoneNo: widget.phoneNo,
-                                title: 'Successful',
-                                content: 'You have successfully created a poll',
-                              ),
-                            ));
+                        navigator.push(
+                          MaterialPageRoute(
+                            builder: (context) => DialogBox(
+                              phoneNo: widget.phoneNo,
+                              title: 'Successful',
+                              content: 'You have successfully created a poll',
+                            ),
+                          ),
+                        );
                       },
                     ),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Color.fromRGBO(22, 86, 185, 1)),
                   ),
                 ],
               ),

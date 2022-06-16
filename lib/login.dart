@@ -13,7 +13,19 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  TextEditingController phoneNo = TextEditingController();
+  late TextEditingController phoneNo;
+
+  @override
+  void initState() {
+    super.initState();
+    phoneNo = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    phoneNo.dispose();
+    super.dispose();
+  }
 
   Future<http.Response> login(String phone) async {
     return http.post(

@@ -231,11 +231,19 @@ class _OTPState extends State<OTP> {
                           await addNewUser(BigInt.parse(phoneNo),
                               widget.name, widget.email);
                         }
-                        navigator.push(
+                        // navigator.push(
+                        //   MaterialPageRoute(
+                        //     builder: (context) => Dashboard1(
+                        //       phoneNo: int.parse(phoneNo),
+                        //     ),
+                        //   ),
+                        // );
+                        navigator.pushReplacement(
                           MaterialPageRoute(
-                            builder: (context) => Dashboard1(
-                              phoneNo: int.parse(phoneNo),
-                            ),
+                            settings: const RouteSettings(
+                                name: "/dashboard1"),
+                            builder: (context) =>
+                                Dashboard1(phoneNo: int.parse(phoneNo)),
                           ),
                         );
                       }
@@ -249,17 +257,4 @@ class _OTPState extends State<OTP> {
       ),
     ));
   }
-}
-
-verifyOtp(context, otp, phoneNo) {
-  //todo: verify otp
-
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => RegDetails(
-        phoneNo: phoneNo,
-      ),
-    ),
-  );
 }

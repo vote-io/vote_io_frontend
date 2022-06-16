@@ -201,6 +201,8 @@ class _VotePageState extends State<VotePage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
+                              settings:
+                                  const RouteSettings(name: "/candidatesCard"),
                               builder: (context) => CandidateCard(
                                 data: candidate[index],
                                 pollId: widget.pollId,
@@ -208,6 +210,16 @@ class _VotePageState extends State<VotePage> {
                               ),
                             ),
                           );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => CandidateCard(
+                          //       data: candidate[index],
+                          //       pollId: widget.pollId,
+                          //       phoneNo: widget.phoneNo,
+                          //     ),
+                          //   ),
+                          // );
                         },
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),

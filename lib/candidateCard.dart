@@ -20,6 +20,7 @@ class _CandidateCardState extends State<CandidateCard> {
 
   @override
   Widget build(BuildContext context) {
+    final navigator = Navigator.of(context);
     data = widget.data;
     return SafeArea(
         child: Scaffold(
@@ -177,10 +178,10 @@ class _CandidateCardState extends State<CandidateCard> {
                           fontWeight: FontWeight.bold),
                     ),
                     onPressed: () async {
-                      dynamic res = await castVote(BigInt.from(widget.phoneNo),
+                      await castVote(BigInt.from(widget.phoneNo),
                           BigInt.from(widget.pollId), data[0]);
-                      print(res);
-                      Navigator.pop(context);
+                      navigator
+                          .popUntil(ModalRoute.withName("/dashboard2"));
                     },
                   ),
                 ),

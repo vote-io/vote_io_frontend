@@ -18,39 +18,6 @@ class AdminPoll extends StatefulWidget {
 
 class _AdminPollState extends State<AdminPoll> {
   final _formKey = GlobalKey<FormState>();
-  // List<Map> candidate = [
-  //   {
-  //     'id': 1,
-  //     'name': 'AAA',
-  //     'description': 'This is candidate 1',
-  //     'picture': 'assets/red.png'
-  //   },
-  //   {
-  //     'id': 2,
-  //     'name': 'BBB',
-  //     'description': 'This is candidate 2',
-  //     'picture': 'assets/blue.png'
-  //   },
-  //   {
-  //     'id': 3,
-  //     'name': 'CCC',
-  //     'description': 'This is candidate 3',
-  //     'picture': 'assets/green.png'
-  //   },
-  //   {
-  //     'id': 1,
-  //     'name': 'AAA',
-  //     'description': 'This is candidate 1',
-  //     'picture': 'assets/red.png'
-  //   },
-  //   {
-  //     'id': 2,
-  //     'name': 'BBB',
-  //     'description': 'This is candidate 2',
-  //     'picture': 'assets/blue.png'
-  //   },
-  // ];
-
   @override
   Widget build(BuildContext context) {
     List candidate = widget.candidates;

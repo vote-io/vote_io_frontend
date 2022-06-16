@@ -31,14 +31,14 @@ class _DialogBoxState extends State<DialogBox> {
           child: Column(
             //mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Image.asset('assets/logo.png'),
-                  Text(
+                  const Text(
                     'VoteHub',
                     style: TextStyle(
                         fontSize: 24,
@@ -50,27 +50,33 @@ class _DialogBoxState extends State<DialogBox> {
               ),
               Center(
                 child: AlertDialog(
-                  backgroundColor: Color.fromRGBO(170, 170, 170, 1),
+                  backgroundColor: const Color.fromRGBO(170, 170, 170, 1),
                   title: Text(
                     '$title',
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.black87,
                         fontSize: 22,
                         fontWeight: FontWeight.bold),
                   ),
-                  content: Text('$content',
-                      style: TextStyle(
+                  content: Text(content,
+                      style: const TextStyle(
                         color: Colors.black87,
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
                       )),
                   actions: <Widget>[
                     TextButton(
-                      onPressed: () => Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  Dashboard1(phoneNo: widget.phoneNo))),
+                      onPressed: () {
+                        Navigator.of(context)
+                            .popUntil(ModalRoute.withName("/dashboard1"));
+                        //   Navigator.pushReplacement(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) =>
+                        //         Dashboard1(phoneNo: widget.phoneNo),
+                        //   ),
+                        // );
+                      },
                       child: const Text(
                         'Got It',
                         style: TextStyle(
