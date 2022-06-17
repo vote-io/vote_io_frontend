@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:vote_io_frontend/constants.dart';
 import 'package:vote_io_frontend/dashboard_1.dart';
-import 'package:vote_io_frontend/regDetails.dart';
 
 import 'blockchain/blockchainSetup.dart';
 
@@ -39,11 +38,11 @@ class _OTPState extends State<OTP> {
     phoneNo = widget.phoneNo;
   }
 
-  @override
-  void dispose() {
-    otp.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   otp.dispose();
+  //   super.dispose();
+  // }
 
   Future<http.Response> verify(String phone, String otp) async {
     return http.post(
@@ -228,8 +227,8 @@ class _OTPState extends State<OTP> {
 
                       if (res["message"] == "OTP correct") {
                         if (widget.registering) {
-                          await addNewUser(BigInt.parse(phoneNo),
-                              widget.name, widget.email);
+                          await addNewUser(
+                              BigInt.parse(phoneNo), widget.name, widget.email);
                         }
                         // navigator.push(
                         //   MaterialPageRoute(
@@ -240,8 +239,7 @@ class _OTPState extends State<OTP> {
                         // );
                         navigator.pushReplacement(
                           MaterialPageRoute(
-                            settings: const RouteSettings(
-                                name: "/dashboard1"),
+                            settings: const RouteSettings(name: "/dashboard1"),
                             builder: (context) =>
                                 Dashboard1(phoneNo: int.parse(phoneNo)),
                           ),

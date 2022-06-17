@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:vote_io_frontend/blockchain/blockchainSetup.dart';
 import 'package:vote_io_frontend/results.dart';
 import 'package:vote_io_frontend/votePage.dart';
-import 'package:intl/intl.dart';
 
 import 'dashboard_1.dart';
 import 'joinPoll.dart';
@@ -152,15 +152,15 @@ class _Dashboard2State extends State<Dashboard2> {
                                       fontWeight: FontWeight.w400),
                                 ),
                                 onPressed: () {
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      settings: const RouteSettings(
-                                          name: "/dashboard2"),
-                                      builder: (context) =>
-                                          Dashboard2(phoneNo: widget.phoneNo),
-                                    ),
-                                  );
+                                  // Navigator.pushReplacement(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     settings: const RouteSettings(
+                                  //         name: "/dashboard2"),
+                                  //     builder: (context) =>
+                                  //         Dashboard2(phoneNo: widget.phoneNo),
+                                  //   ),
+                                  // );
                                   // Navigator.pushReplacement(
                                   //     context,
                                   //     MaterialPageRoute(
@@ -221,22 +221,6 @@ class _Dashboard2State extends State<Dashboard2> {
                                       ),
                                     );
                                     setState(() {});
-                                    // Navigator.push(
-                                    //   context,
-                                    //   MaterialPageRoute(
-                                    //     builder: (context) => VotePage(
-                                    //       candidates: snapshot.data[0][index][0]
-                                    //           [3],
-                                    //       pollId: snapshot.data[0][index][0][0]
-                                    //           .toInt(),
-                                    //       votingRange: [
-                                    //         snapshot.data[0][index][0][4],
-                                    //         snapshot.data[0][index][0][5]
-                                    //       ],
-                                    //       phoneNo: widget.phoneNo,
-                                    //     ),
-                                    //   ),
-                                    // );
                                   } else {
                                     const snackBar = SnackBar(
                                       content: Text('Already voted'),
@@ -269,7 +253,6 @@ class _Dashboard2State extends State<Dashboard2> {
                                       winnerId = x[0].toString();
                                     }
                                   }
-                                  //print(widget.candidates);
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -346,39 +329,28 @@ class _Dashboard2State extends State<Dashboard2> {
                   },
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 300 + 100 - 50,
-                    height: 54,
-                    padding: const EdgeInsets.fromLTRB(40, 10, 40, 0),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: const Color.fromRGBO(22, 86, 185, 1)),
-                    child: TextButton(
-                      child: const Text(
-                        'Join a Poll',
-                        style: TextStyle(
-                            color: Color.fromRGBO(255, 255, 255, 1),
-                            fontSize: 20,
-                            fontFamily: 'poppins',
-                            fontWeight: FontWeight.bold),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                JoinPoll(phoneNo: widget.phoneNo),
-                          ),
-                        );
-
-                        setState(() {});
-                      },
+              ElevatedButton(
+                onPressed: () async {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => JoinPoll(phoneNo: widget.phoneNo),
                     ),
-                  ),
-                ],
+                  );
+
+                  setState(() {});
+                },
+                child: Icon(Icons.how_to_vote_outlined),
+                style: ElevatedButton.styleFrom(
+                    fixedSize: Size(54, 54),
+                    shape: CircleBorder(),
+                    primary: Color.fromRGBO(22, 86, 185, 1), // <-- Button color
+                    onPrimary:
+                        Color.fromRGBO(227, 255, 235, 1), // <-- Splash color
+                    elevation: 8),
+              ),
+              SizedBox(
+                height: 40,
               ),
             ],
           ),

@@ -8,7 +8,7 @@ late Client httpClient;
 late Web3Client ethClient;
 // JSON-RPC is a remote procedure call protocol encoded in JSON
 // Remote Procedure Call (RPC) is about executing a block of code on another server
-String rpcUrl = 'HTTP://10.0.2.2:7545';
+String rpcUrl = 'HTTP://127.0.0.1:7545';
 
 Future<void> initialBlockChainSetup() async {
   /// This will start a client that connects to a JSON RPC API, available at RPC URL.
@@ -24,7 +24,7 @@ Future<void> initialBlockChainSetup() async {
 }
 
 String privateKey =
-    '318703719c0124f42a8a11c0e7a7a3951f7133d1ec5f646ba71816faed0d3a29';
+    '984944365084d1a0d57c2df00819ffcc2702fdd61533335ab472d04d0917923d';
 late Credentials credentials;
 late EthereumAddress myAddress;
 
@@ -44,7 +44,7 @@ Future<void> getDeployedContract() async {
   abi = jsonEncode(abiJson['abi']);
 
   contractAddress =
-      EthereumAddress.fromHex(abiJson['networks']['5777']['address']);
+      EthereumAddress.fromHex(abiJson['networks']['1337']['address']);
 }
 
 /// This will help us to find all the [public functions] defined by the [contract]
@@ -99,14 +99,6 @@ Future<void> writeContract(
     ),
   );
 }
-
-// Future<void> writeUser() async {
-//   writeContract(addUser, ['abc', 'abc', 'abc']);
-// }
-//
-// Future<void> readUser() async {
-//   print(await readContract(getUser, ['abc']));
-// }
 
 Future<dynamic> addNewUser(BigInt phoneNo, String name, String email) async {
   return await writeContract(addUser, [phoneNo, name, email]);

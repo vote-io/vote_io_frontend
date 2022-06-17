@@ -246,7 +246,7 @@ class _pollStep2State extends State<pollStep2> {
                             BigInt.from(widget.endDate));
                         print(reply);
 
-                        navigator.push(
+                        navigator.pushReplacement(
                           MaterialPageRoute(
                             builder: (context) => DialogBox(
                               phoneNo: widget.phoneNo,

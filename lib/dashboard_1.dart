@@ -118,22 +118,7 @@ class _Dashboard1State extends State<Dashboard1> {
                                     fontFamily: 'poppins',
                                     fontWeight: FontWeight.w400),
                               ),
-                              onPressed: () {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    settings: const RouteSettings(
-                                        name: "/dashboard1"),
-                                    builder: (context) =>
-                                        Dashboard1(phoneNo: widget.phoneNo),
-                                  ),
-                                );
-                                // Navigator.pushReplacement(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //         builder: (context) => Dashboard1(
-                                //             phoneNo: widget.phoneNo)));
-                              },
+                              onPressed: () {},
                             ),
                           ),
                           Container(
@@ -212,7 +197,7 @@ class _Dashboard1State extends State<Dashboard1> {
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Text(
-                                    '${snapshot.data[0][index][0].toInt()+1}',
+                                    '${snapshot.data[0][index][0].toInt() + 1}',
                                     style: const TextStyle(
                                       color: Color.fromRGBO(170, 170, 170, 1),
                                       fontWeight: FontWeight.w600,
@@ -264,39 +249,53 @@ class _Dashboard1State extends State<Dashboard1> {
                 },
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 300 + 100 - 50,
-                  height: 54,
-                  padding: const EdgeInsets.fromLTRB(40, 10, 40, 0),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: const Color.fromRGBO(22, 86, 185, 1)),
-                  child: TextButton(
-                    child: const Text(
-                      'Create a new Poll',
-                      style: TextStyle(
-                          color: Color.fromRGBO(255, 255, 255, 1),
-                          fontSize: 20,
-                          fontFamily: 'poppins',
-                          fontWeight: FontWeight.bold),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     Container(
+            //       width: 300 + 100 - 50,
+            //       height: 54,
+            //       padding: const EdgeInsets.fromLTRB(40, 10, 40, 0),
+            //       decoration: BoxDecoration(
+            //           borderRadius: BorderRadius.circular(10),
+            //           color: const Color.fromRGBO(22, 86, 185, 1)),
+            //       child: TextButton(
+            //         child: const Text(
+            //           'Create a new Poll',
+            //           style: TextStyle(
+            //               color: Color.fromRGBO(255, 255, 255, 1),
+            //               fontSize: 20,
+            //               fontFamily: 'poppins',
+            //               fontWeight: FontWeight.bold),
+            //         ),
+            //         onPressed: () async {},
+            //       ),
+            //     ),
+            //   ],
+            // ),
+            ElevatedButton(
+              onPressed: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CreatePoll(
+                      phoneNo: widget.phoneNo,
                     ),
-                    onPressed: () async {
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CreatePoll(
-                            phoneNo: widget.phoneNo,
-                          ),
-                        ),
-                      );
-                      setState(() {});
-                    },
                   ),
-                ),
-              ],
+                );
+                setState(() {});
+              },
+              child: Icon(Icons.add),
+              style: ElevatedButton.styleFrom(
+                  fixedSize: Size(54, 54),
+                  shape: CircleBorder(),
+                  primary: Color.fromRGBO(22, 86, 185, 1), // <-- Button color
+                  onPrimary:
+                      Color.fromRGBO(227, 255, 235, 1), // <-- Splash color
+                  elevation: 8),
+            ),
+            SizedBox(
+              height: 40,
             ),
           ],
         ),

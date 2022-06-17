@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'dashboard_1.dart';
-
 class DialogBox extends StatefulWidget {
   const DialogBox(
       {Key? key,
@@ -67,8 +65,13 @@ class _DialogBoxState extends State<DialogBox> {
                   actions: <Widget>[
                     TextButton(
                       onPressed: () {
-                        Navigator.of(context)
-                            .popUntil(ModalRoute.withName("/dashboard1"));
+                        Navigator.pop(context);
+
+                        // int count;
+                        // count = 0;
+                        // Navigator.popUntil(context, (route) {
+                        //   return count++ == 3;
+                        // });
                         //   Navigator.pushReplacement(
                         //   context,
                         //   MaterialPageRoute(

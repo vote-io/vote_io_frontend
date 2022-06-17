@@ -60,8 +60,7 @@ class _ResultsState extends State<Results> {
                       )),
                   actions: <Widget>[
                     TextButton(
-                      onPressed: () =>
-                          Navigator.pushReplacementNamed(context, 'dashboard1'),
+                      onPressed: () => Navigator.pop(context),
                       child: const Text(
                         'Got It',
                         style: TextStyle(

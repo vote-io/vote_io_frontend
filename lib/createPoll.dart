@@ -346,7 +346,7 @@ class _create_poll_formState extends State<create_poll_form> {
                     String name = nameController.text;
                     String desc = descController.text;
 
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) => pollStep2(
